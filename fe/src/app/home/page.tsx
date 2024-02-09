@@ -46,9 +46,21 @@ const homeTutorialContent = [
   // },
 ];
 
+const tabData = [
+  {
+    title: "어떤 반려동물을 찾고 계신가요?",
+    content: [],
+  },
+  {
+    title: "어떤 관리가 필요하신가요?",
+    content: [],
+  },
+];
+
 export default function Home() {
   const [mobile, setMobile] = useState<boolean>(false);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width:1224px)" });
+  const [tabIndex, setTabIndex] = useState<number>(0);
   const router = useRouter();
 
   const checkResize = () => {
@@ -67,7 +79,7 @@ export default function Home() {
     <section className="flex h-screen w-full flex-col items-center justify-start z-0 py-8 space-y-12">
       <div className="flex flex-col justify-center items-start px-6 space-y-1 w-full">
         <p className="select-none text-xl font-bold text-start w-full">
-          어떤 반려동물을 찾고 계신가요?
+          {tabIndex == 0 ? tabData[0].title : tabData[1].title}
         </p>
         <p className="text-pretty break-keep text-sm"></p>
       </div>
@@ -134,7 +146,7 @@ export default function Home() {
         <div></div>
       </div>
       <Tutorial tutorialContent={homeTutorialContent}></Tutorial>
-      <Footer></Footer>
+      <Footer tabIndex={tabIndex} setTabIndex={setTabIndex}></Footer>
     </section>
   );
 }
