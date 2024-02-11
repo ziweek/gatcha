@@ -23,16 +23,16 @@ const homeTutorialContent = [
     ),
     body: (
       <div>
-        <p className="text-center w-full text-xl font-bold">
+        <p className="w-full text-xl font-bold text-center">
           {projectInfo.description}
         </p>
-        <div className="w-full flex flex-col items-center">
+        <div className="flex flex-col items-center w-full">
           <LottieHi loop={true} width={"200px"}></LottieHi>
         </div>
-        <p className="text-center w-full text-pretty">
+        <p className="w-full text-center text-pretty">
           안녕하세요. {projectInfo.name}입니다.
         </p>
-        <p className="text-center w-full text-pretty">
+        <p className="w-full text-center text-pretty">
           지금부터 튜토리얼을 진행하겠습니다.
         </p>
       </div>
@@ -44,7 +44,7 @@ const homeTutorialContent = [
   //     <>
   //       <LottieDebate loop={true} height={"250px"}></LottieDebate>
   //       <p className="font-bold">기능소개</p>
-  //       <p className="break-keep text-pretty  px-2">
+  //       <p className="px-2 break-keep text-pretty">
   //         다양한 주제에서 국회 의정활동 체험을 즐겨보세요. 흥미로운 주제로 더욱
   //         유익하고 재미있는 체험을 즐길 수 있습니다!
   //       </p>
@@ -83,9 +83,9 @@ export default function Home() {
   }, [isTabletOrMobile]);
 
   return (
-    <section className="flex h-screen w-full flex-col items-center justify-start z-0 py-8 space-y-6">
-      <div className="flex flex-col justify-center items-start px-4 space-y-1 w-full">
-        <p className="select-none text-xl font-bold text-start w-full">
+    <section className="z-0 flex flex-col items-center justify-start w-full h-screen py-8 space-y-6">
+      <div className="flex flex-col items-start justify-center w-full px-4 space-y-1">
+        <p className="w-full text-xl font-bold select-none text-start">
           {tabIndex == 0 ? tabData[0].title : ""}
         </p>
       </div>
@@ -136,10 +136,10 @@ export default function Home() {
                 radius={"sm"}
                 className="min-h-[150px] h-full w-full p-4 bg-cover bg-center border-1"
                 onPress={() => {
-                  // router.push("/game");
+                  router.push("/search");
                 }}
               >
-                <div className="flex flex-col justify-center items-center w-full h-full">
+                <div className="flex flex-col items-center justify-center w-full h-full">
                   <p className="w-full text-sm">{e.text}</p>
                 </div>
               </Card>
@@ -161,35 +161,39 @@ export default function Home() {
           //       }
           // }
         >
-          <div className="flex flex-col justify-center items-start w-full gap-4">
-            <div className="flex flex-col justify-center items-start w-full">
-              <p className="select-none text-xl font-bold text-start w-full">
+          <div className="flex flex-col items-start justify-center w-full gap-8">
+            <div className="flex flex-col items-start justify-center w-full">
+              <p className="w-full text-xl font-bold select-none text-start">
                 사용자님,
               </p>
-              <p className="select-none text-xl text-start w-full">
+              <p className="w-full text-xl select-none text-start">
                 집에서 편리하게
               </p>
-              <p className="select-none text-xl text-start w-full">
+              <p className="w-full text-xl select-none text-start">
                 펫케어 서비스를
               </p>
-              <p className="select-none text-xl text-start w-full">
+              <p className="w-full text-xl select-none text-start">
                 이용해보세요.
               </p>
             </div>
             <Input
               placeholder="이용할 집주소 검색하기"
               variant={"flat"}
+              classNames={{ input: "text-lg" }}
+              onFocus={() => {
+                router.push("/search");
+              }}
             ></Input>
           </div>
           <div className="w-full flex flex-col justify-center items-center h-[150px]">
-            <div className="flex flex-col justify-center items-center w-full">
-              <p className="select-none text-xl font-bold w-full text-center">
+            <div className="flex flex-col items-center justify-center w-full">
+              <p className="w-full text-xl font-bold text-center select-none">
                 편안한 반려 생활
               </p>
-              <p className="select-none text-xl font-bold w-full text-center">
+              <p className="w-full text-xl font-bold text-center select-none">
                 홈서비스가 도와드립니다.
               </p>
-              <p className="select-none text-sm w-full text-center pt-2">
+              <p className="w-full pt-2 text-sm text-center select-none">
                 혜택을 소개할게요.
               </p>
             </div>

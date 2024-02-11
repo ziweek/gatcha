@@ -20,7 +20,7 @@ export default function Footer(props: any) {
         </Button>
       )}
       <div
-        className="flex flex-row w-full justify-between items-center pb-8 p-2 border-t-2 bg-white"
+        className="flex flex-row w-full justify-between items-center pb-8 p-2 border-t-1 bg-white dark:bg-dark min-h-[60px]"
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
       >
         <div className="flex flex-col justify-center items-center">
