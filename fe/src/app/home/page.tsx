@@ -1,18 +1,11 @@
 "use client";
 
 import Tutorial from "@/components/tutorial";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
-  Chip,
-  Input,
-} from "@nextui-org/react";
+import { Card, Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { LottieHi, LottieDebate } from "@/components/common/lotties";
+import { LottieHi } from "@/components/common/lotties";
 import { projectInfo } from "@/components/common/data";
 import Footer from "@/components/common/footer";
 
