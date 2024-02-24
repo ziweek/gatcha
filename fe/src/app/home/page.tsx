@@ -1,6 +1,6 @@
 "use client";
 
-import Tutorial from "@/components/tutorial";
+import Tutorial from "@/components/modal-tutorial";
 import { Card, Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -72,8 +72,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    checkResize();
-  }, [isTabletOrMobile]);
+    router.push("/map");
+  }, []);
 
   return (
     <section className="z-0 flex flex-col items-center justify-start w-full h-screen py-8 space-y-6">
