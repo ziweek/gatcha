@@ -1,6 +1,6 @@
 import { Button, Divider, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { IconAdoption, IconCare, IconDog } from "./icons";
+import { IconAdoption, IconCare } from "./icons";
 
 export default function Footer(props: any) {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function Footer(props: any) {
           펫케어 지금 바로 시작하기
         </Button>
       )}
-      {props.isMap ? (
+      {props.isOneButton ? (
         <div className="flex flex-row w-full justify-between items-center pb-8 pt-4 border-t-1 bg-white dark:bg-black px-4 border-white dark:border-gray-500">
           <Button
             isLoading={props.isLoading}
@@ -38,7 +38,7 @@ export default function Footer(props: any) {
               props.setIsModalVisible(!props.isModalVisible);
             }}
           >
-            이 지역 반려견 보기
+            {props.buttonText}
           </Button>
         </div>
       ) : (

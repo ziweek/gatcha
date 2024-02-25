@@ -17,39 +17,14 @@ export default function Header(props: any) {
   const sliderRef = useRef<any>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const [selectedKeys, setSelectedKeys] = useState(
-    new Set(["설정된 필터 없음"])
-  );
   const [numOfFilterOption, setNumOfFilterOption] = useState<number | null>(
     null
-  );
-  // const [selectedOptions, props.setSelectedOptions] = useState<any[]>([
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  // ]);
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys]
   );
 
   return (
     <section className="top-0 z-50 w-screen border-b-1 border-white dark:border-gray-500">
       <div className="flex flex-row w-full justify-between items-center bg-white dark:bg-black min-h-[60px] p-2">
         <div className="flex flex-row items-center justify-center w-full gap-1 px-4">
-          {/* <Button
-            isIconOnly
-            variant={"light"}
-            onPress={() => {
-              router.back();
-            }}
-            disableAnimation
-          >
-            <p className="w-full text-xl font-bold select-none">{"<"}</p>
-          </Button> */}
           <p className="w-full text-xl font-bold select-none text-start">
             {props.title}
           </p>
@@ -57,7 +32,7 @@ export default function Header(props: any) {
       </div>
       {pathname == "/map" && (
         <>
-          <div className="bg-white dark:bg-black flex flex-row justify-start items-center w-full pr-2 py-4 gap-2 overflow-x-auto scrollbar-hide">
+          <div className="bg-white dark:bg-black flex flex-row justify-start items-center w-full pr-2 py-2 gap-2 overflow-x-auto scrollbar-hide">
             <div ref={sliderRef} className="pr-2"></div>
             {mapFilterOptions.map((e, i) => {
               return (
@@ -70,14 +45,6 @@ export default function Header(props: any) {
                       color={"danger"}
                       className="min-w-fit"
                       onPress={() => {
-                        props.setSelectedOptions([
-                          null,
-                          null,
-                          null,
-                          null,
-                          null,
-                        ]);
-                        setNumOfFilterOption(null);
                         if (
                           sliderRef.current != null &&
                           sliderRef.current != undefined
@@ -88,11 +55,14 @@ export default function Header(props: any) {
                             inline: "nearest",
                           });
                         }
-                        // console.log(sliderRef);
-                        // window.scrollTo({
-                        //   left: sliderRef.current.offsetLeft,
-                        //   behavior: "smooth",
-                        // });
+                        props.setSelectedOptions([
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                        ]);
+                        setNumOfFilterOption(null);
                       }}
                     >
                       <p
@@ -300,48 +270,4 @@ export default function Header(props: any) {
       )}
     </section>
   );
-}
-
-{
-  /* <Dropdown>
-<DropdownTrigger>
-  <Button
-    variant={"light"}
-    className="capitalize"
-    color={"default"}
-  >
-    {selectedValue}
-  </Button>
-</DropdownTrigger>
-<DropdownMenu
-  aria-label="Single selection example"
-  variant="flat"
-  disallowEmptySelection
-  selectionMode="multiple"
-  selectedKeys={selectedKeys}
-  onSelectionChange={(k: any) => {
-    if (k["anchorKey"] == "필터 모두 해제하기") {
-      setSelectedKeys(new Set(["설정된 필터 없음"]));
-    } else {
-      setSelectedKeys(k);
-    }
-  }}
->
-  <DropdownSection showDivider>
-    <DropdownItem key="가격대">가격대</DropdownItem>
-    <DropdownItem key="견종">견종</DropdownItem>
-    <DropdownItem key="성별">성별</DropdownItem>
-    <DropdownItem key="거리순">거리순</DropdownItem>
-  </DropdownSection>
-  <DropdownSection>
-    <DropdownItem
-      key="필터 모두 해제하기"
-      className="text-danger"
-      color="danger"
-    >
-      필터 모두 해제하기
-    </DropdownItem>
-  </DropdownSection>
-</DropdownMenu>
-</Dropdown> */
 }

@@ -1,27 +1,11 @@
 "use client";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  Link,
-  Tooltip,
-} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import Image from "next/image";
-import { IconLogo } from "@/components/common/icons";
 import { projectInfo } from "@/components/common/data";
 
 export default function Home() {
@@ -109,7 +93,7 @@ export default function Home() {
                   size={mobile ? "md" : "lg"}
                   variant={"bordered"}
                   onClick={() => {
-                    router.push("/home");
+                    router.push("/map");
                   }}
                 >
                   <p className="font-bold text-white">서비스 체험하기</p>

@@ -11,5 +11,5 @@ const nextConfig = { reactStrictMode: false };
 
 module.exports = withPWA({
   // next.js config
-  nextConfig,
+  ...nextConfig,
 });
