@@ -16,6 +16,10 @@
   }
 }
 
+.gm-style iframe + div {
+  border: none !important;
+}
+
 .carousel .control-dots .dot {
   background-color: black !important;
 }
