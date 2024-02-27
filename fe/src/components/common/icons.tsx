@@ -653,3 +653,89 @@ export const IconFish = (props: IconProps) => {
     </>
   );
 };
+export const IconTriangle = (props: IconProps) => {
+  return (
+    <>
+      {props.isActive ? (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 -0.5 17 17"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          className="si-glyph si-glyph-triangle-up"
+        >
+          <title>1236</title>
+
+          <defs></defs>
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
+              fill={props.fill || "#080341"}
+              className="si-glyph-fill"
+            ></path>
+          </g>
+        </svg>
+      ) : (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 -0.5 17 17"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          className="si-glyph si-glyph-triangle-up"
+        >
+          <title>1236</title>
+
+          <defs></defs>
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
+              fill={props.fill || "#080341"}
+              className="si-glyph-fill"
+            ></path>
+          </g>
+        </svg>
+      )}
+    </>
+  );
+};
+export const IconBack = (props: IconProps) => {
+  return (
+    <>
+      {props.isActive ? (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 1024 1024"
+          fill={props.fill || "#080341"}
+          className="icon"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M669.6 849.6c8.8 8 22.4 7.2 30.4-1.6s7.2-22.4-1.6-30.4l-309.6-280c-8-7.2-8-17.6 0-24.8l309.6-270.4c8.8-8 9.6-21.6 2.4-30.4-8-8.8-21.6-9.6-30.4-2.4L360.8 480.8c-27.2 24-28 64-0.8 88.8l309.6 280z"
+            fill=""
+          />
+        </svg>
+      ) : (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 1024 1024"
+          fill={props.fill || "#080341"}
+          className="icon"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M669.6 849.6c8.8 8 22.4 7.2 30.4-1.6s7.2-22.4-1.6-30.4l-309.6-280c-8-7.2-8-17.6 0-24.8l309.6-270.4c8.8-8 9.6-21.6 2.4-30.4-8-8.8-21.6-9.6-30.4-2.4L360.8 480.8c-27.2 24-28 64-0.8 88.8l309.6 280z"
+            fill=""
+          />
+        </svg>
+      )}
+    </>
+  );
+};

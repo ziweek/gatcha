@@ -38,6 +38,8 @@ export default function Home() {
           title="지도 탐색"
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
         ></Header>
       </div>
       {/* <ToastContainer
@@ -62,6 +64,8 @@ export default function Home() {
       <ModalDetail
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
       ></ModalDetail>
     </section>
   );

@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import Header from "./common/header";
 
 type propsForTutorial = {
   tutorialContent: any;
@@ -32,20 +33,15 @@ export default function ModalDetail(props: any) {
       isDismissable
       closeButton={<></>}
     >
-      <ModalContent className="overflow-y-auto">
-        <ModalHeader className="flex flex-col gap-1 justify-end items-center w-full">
-          <Button
-            color="danger"
-            variant="light"
-            className="w-fit"
-            onPress={() => {
-              props.setIsModalVisible(false);
-            }}
-          >
-            돌아가기
-          </Button>
-          {/* {props.tutorialContent[indexOfModal]?.header} */}
-        </ModalHeader>
+      <ModalContent className="overflow-y-auto gap-4">
+        <Header
+          title="지도 탐색"
+          isBackButtonVisible
+          selectedOptions={props.selectedOptions}
+          setSelectedOptions={props.setSelectedOptions}
+          isModalVisible={props.isModalVisible}
+          setIsModalVisible={props.setIsModalVisible}
+        ></Header>
         <div className="flex flex-col justify-start px-4 gap-8 items-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => {
             return (
