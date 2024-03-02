@@ -1,7 +1,7 @@
 import { Button, Slider, SliderStepMark } from "@nextui-org/react";
 import { useState, useRef, useEffect } from "react";
 import { FILTER_PRESET } from "./data";
-import { IconBack, IconTriangle } from "./icons";
+import { IconBack, IconFilter, IconGPS, IconTriangle } from "./icons";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
@@ -31,7 +31,7 @@ export default function Header(props: any) {
     >
       {/* BASIC HEADER */}
       <div className="flex flex-row w-full justify-between items-center bg-[#F2E9DA] dark:bg-black min-h-[60px] p-2">
-        <div className="flex flex-row items-center justify-start w-full gap-1 px-2">
+        <div className="flex flex-row items-center justify-between w-full gap-1 px-2">
           {props.isBackButtonVisible && (
             <Button
               variant={"light"}
@@ -52,9 +52,23 @@ export default function Header(props: any) {
             ></Image>
           )}
           {props.title && (
-            <p className="w-full text-xl font-bold select-none text-start">
-              {props.title}
-            </p>
+            <>
+              <p className="w-full text-xl font-bold select-none text-center">
+                {props.title}
+              </p>
+              <div className="opacity-0">
+                <Button
+                  isDisabled
+                  variant={"light"}
+                  isIconOnly
+                  onPress={() => {
+                    props.setIsModalVisible(false);
+                  }}
+                >
+                  <IconBack fill={"#000000"} width={"20px"}></IconBack>
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -64,11 +78,23 @@ export default function Header(props: any) {
         <>
           {/* FILTER OPTIONS */}
           <div
-            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-4 gap-2 overflow-x-auto scrollbar-hide w-[95vw] mx-auto rounded-lg mt-2 border-primary border-2 ${
+            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-4 gap-2 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
               isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
             }`}
           >
             <div ref={sliderRef} className="pr-2"></div>
+            <div>
+              <IconFilter
+                width={25}
+                // fill={
+                //   Object.keys(activatedFilters) == undefined
+                //     ? "#ffffff"
+                //     : "#FF917E"
+                // }
+                fill={"#FF917E"}
+                strokeFill={"#FF917E"}
+              ></IconFilter>
+            </div>
             {FILTER_PRESET.order.map((e: string, i: number) => {
               return (
                 <Button
@@ -147,7 +173,7 @@ export default function Header(props: any) {
               radius={"sm"}
               size={"sm"}
               color={"danger"}
-              className="min-w-fit px-2"
+              className="min-w-fit mx-2"
               onPress={() => {
                 if (
                   sliderRef.current != null &&
@@ -169,7 +195,7 @@ export default function Header(props: any) {
           {/* FILTER DETAIL */}
           {isFilterDetailVisible == true && (
             <>
-              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 gap-2 flex-wrap w-[95vw] mx-auto border-primary border-r-2 border-l-2">
+              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 gap-2 flex-wrap w-[92%] mx-auto border-primary border-r-2 border-l-2 ">
                 {FILTER_PRESET.content[activatedFilter].type == "slider" ? (
                   <Slider
                     className="py-2"
@@ -290,7 +316,7 @@ export default function Header(props: any) {
                 )}
               </div>
               {/* FILTER CONTROL */}
-              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-2 gap-2 flex-wrap w-[95vw] mx-auto rounded-b-lg border-primary border-2 border-t-0">
+              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-2 gap-2 flex-wrap w-[92%] mx-auto rounded-b-lg border-primary border-2 border-t-0">
                 <div className="flex flex-row w-fit gap-2">
                   {[
                     { text: "해당 필터 저장" },
@@ -340,6 +366,20 @@ export default function Header(props: any) {
                 </Button>
               </div>
             </>
+          )}
+
+          {/* GPS Button */}
+          {props.isGpsVisible && (
+            <div className="w-full flex flex-col items-end px-4 pt-2">
+              <Button
+                isIconOnly
+                variant={"solid"}
+                radius={"sm"}
+                className="bg-white border-primary border-1 drop-shadow-md"
+              >
+                <IconGPS fill="#FF917E" width={"27px"}></IconGPS>
+              </Button>
+            </div>
           )}
         </>
       )}

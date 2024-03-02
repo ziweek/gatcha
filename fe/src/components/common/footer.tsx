@@ -1,7 +1,7 @@
 import { Button, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { IconAdoption, IconCare } from "./icons";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
 export default function Footer(props: any) {
@@ -16,7 +16,7 @@ export default function Footer(props: any) {
   const loadData = () => {
     const interval = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Footer(props: any) {
           <Button
             isDisabled
             isLoading={isLoading}
-            className="bg-white rounded-b-none offset opacity-100"
+            className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg"
           >
             {!isLoading && "32마리"}
           </Button>

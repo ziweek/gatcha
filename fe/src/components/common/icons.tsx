@@ -3,6 +3,7 @@ type IconProps = {
   width?: any;
   height?: number;
   fill?: string;
+  strokeFill?: string;
   strokeWidth?: number;
   isActive?: boolean;
 };
@@ -733,6 +734,133 @@ export const IconBack = (props: IconProps) => {
           <path
             d="M669.6 849.6c8.8 8 22.4 7.2 30.4-1.6s7.2-22.4-1.6-30.4l-309.6-280c-8-7.2-8-17.6 0-24.8l309.6-270.4c8.8-8 9.6-21.6 2.4-30.4-8-8.8-21.6-9.6-30.4-2.4L360.8 480.8c-27.2 24-28 64-0.8 88.8l309.6 280z"
             fill=""
+          />
+        </svg>
+      )}
+    </>
+  );
+};
+export const IconGPS = (props: IconProps) => {
+  return (
+    <>
+      {props.isActive ? (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+          />
+          <path
+            d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+          />
+          <path
+            d="M2 12L4 12"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M20 12L22 12"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M12 4V2"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M12 22V20"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      ) : (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+          />
+          <path
+            d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+          />
+          <path
+            d="M2 12L4 12"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M20 12L22 12"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M12 4V2"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M12 22V20"
+            stroke={props.fill || "#080341"}
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      )}
+    </>
+  );
+};
+
+export const IconFilter = (props: IconProps) => {
+  return (
+    <>
+      {props.isActive ? (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 24 24"
+          fill={props.fill || "#080341"}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.22657 2C2.50087 2 1.58526 4.03892 2.73175 5.32873L8.99972 12.3802V19C8.99972 19.3788 9.21373 19.725 9.55251 19.8944L13.5525 21.8944C13.8625 22.0494 14.2306 22.0329 14.5255 21.8507C14.8203 21.6684 14.9997 21.3466 14.9997 21V12.3802L21.2677 5.32873C22.4142 4.03893 21.4986 2 19.7729 2H4.22657Z"
+            stroke={props.strokeFill || "#080341"}
+          />
+        </svg>
+      ) : (
+        <svg
+          height={props.height}
+          width={props.width}
+          viewBox="0 0 24 24"
+          fill={props.fill || "#080341"}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.22657 2C2.50087 2 1.58526 4.03892 2.73175 5.32873L8.99972 12.3802V19C8.99972 19.3788 9.21373 19.725 9.55251 19.8944L13.5525 21.8944C13.8625 22.0494 14.2306 22.0329 14.5255 21.8507C14.8203 21.6684 14.9997 21.3466 14.9997 21V12.3802L21.2677 5.32873C22.4142 4.03893 21.4986 2 19.7729 2H4.22657Z"
+            stroke={props.strokeFill || "#080341"}
           />
         </svg>
       )}
