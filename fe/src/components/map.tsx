@@ -682,7 +682,8 @@ export default function BaseMap() {
             zoomControl: false,
             mapTypeControl: false,
             fullscreenControl: false,
-            styles: systemTheme == "dark" ? MapStyleAubergine : MapStyleRetro,
+            styles: MapStyleRetro,
+            // styles: systemTheme == "dark" ? MapStyleAubergine : MapStyleRetro,
           }}
           onZoomChanged={() => {
             // isDefined && mapRef.current.props.zoom == 10;
@@ -712,18 +713,18 @@ export default function BaseMap() {
                   scaledSize: new window.google.maps.Size(80, 80),
                 }}
               >
-                {selectedMarker == e && (
+                {/* {selectedMarker == e && (
                   <InfoWindowF
                     position={selectedMarker}
                     options={{
                       pixelOffset: new window.google.maps.Size(0, -5),
                     }}
                     onCloseClick={() => {
-                      setSelectedMarker(null);
+                      // setSelectedMarker(null);
                     }}
                   >
                     <>
-                      {/* <div className="w-[350px] h-[250px] flex flex-col justify-start items-start space-y-2 overflow-y-scroll px-1 py-1 select-none dark:bg-black">
+                      <div className="w-[350px] h-[250px] flex flex-col justify-start items-start space-y-2 overflow-y-scroll px-1 py-1 select-none dark:bg-black">
                       <div className="flex flex-col justify-center items-start space-y-1 w-fit">
                         <Chip
                           variant={"solid"}
@@ -792,10 +793,10 @@ export default function BaseMap() {
                           className="object-cover w-full h-full"
                         ></Image>
                       </Card>
-                    </div> */}
+                    </div>
                     </>
                   </InfoWindowF>
-                )}
+                )} */}
               </MarkerF>
             );
           })}
