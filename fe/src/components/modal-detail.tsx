@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import Header from "./common/header";
 
@@ -23,7 +22,6 @@ type propsForTutorial = {
 export default function ModalDetail(props: any) {
   const router = useRouter();
 
-  const [indexOfModal, setIndexOfModal] = useState<number>(0);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width:1224px)" });
 
   return (
@@ -33,10 +31,13 @@ export default function ModalDetail(props: any) {
       isDismissable
       closeButton={<></>}
     >
-      <ModalContent className="overflow-y-auto gap-4">
+      <ModalContent className="overflow-y-auto gap-4 flex flex-col">
         <Header
+          isLogoVisible={false}
           title="지도 탐색"
           isBackButtonVisible
+          isFilterBoxVisible
+          isFixed={false}
           selectedOptions={props.selectedOptions}
           setSelectedOptions={props.setSelectedOptions}
           isModalVisible={props.isModalVisible}
@@ -92,8 +93,8 @@ export default function ModalDetail(props: any) {
           <Pagination
             total={5}
             initialPage={1}
-            variant={"light"}
-            isCompact
+            variant={"faded"}
+            showControls
           ></Pagination>
         </div>
         <ModalFooter className={isTabletOrMobile ? "mb-4" : ""}>

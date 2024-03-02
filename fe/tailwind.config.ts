@@ -11,7 +11,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: { primary: "#FFB2A5" },
+      colors: { primary: "#FF917E" },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -20,9 +20,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [
-    nextui({ theme: { colors: { primary: { DEFAULT: "#FFB2A5" } } } }),
-    require("tailwind-scrollbar-hide"),
-  ],
+  plugins: [nextui({}), require("tailwind-scrollbar-hide")],
 };
 export default config;

@@ -1,9 +1,29 @@
-import { Button, Divider, Spinner } from "@nextui-org/react";
+import { Button, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { IconAdoption, IconCare } from "./icons";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 
 export default function Footer(props: any) {
   const router = useRouter();
+  const { data } = useQuery({
+    queryKey: ["activatedFilters"],
+    queryFn: () => {},
+    staleTime: Infinity,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadData = () => {
+    const interval = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    // console.log(data);
+    setIsLoading(true);
+    loadData();
+  }, [data]);
 
   return (
     <section className="w-screen z-50 fixed bottom-0">
@@ -21,19 +41,24 @@ export default function Footer(props: any) {
         </Button>
       )}
       {props.isOneButton ? (
-        <div className="flex flex-row w-full justify-between items-center pb-8 pt-4 border-t-1 bg-white dark:bg-black px-4 border-white dark:border-gray-500">
+        <div className="flex flex-col w-full justify-between items-center pb-8 pt-4 px-4">
           <Button
-            isLoading={props.isLoading}
+            isDisabled
+            isLoading={isLoading}
+            className="bg-white rounded-b-none offset opacity-100"
+          >
+            {!isLoading && "32마리"}
+          </Button>
+          <Button
+            // isLoading={isLoading}
             radius={"sm"}
             fullWidth
             size={"lg"}
-            className={`font-bold flex flex-row ${
-              props.isLoading ? "justify-between" : ""
+            className={`font-bold flex flex-row shadow-xl ${
+              isLoading ? "justify2-between" : ""
             }`}
             color={"primary"}
-            endContent={
-              props.isLoading && <Spinner className="opacity-0"></Spinner>
-            }
+            // endContent={isLoading && <Spinner className="opacity-0"></Spinner>}
             onPress={() => {
               props.setIsModalVisible(!props.isModalVisible);
             }}

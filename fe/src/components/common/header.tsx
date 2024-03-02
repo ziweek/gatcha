@@ -1,10 +1,10 @@
 import { Button, Slider, SliderStepMark } from "@nextui-org/react";
-import { useRouter, usePathname } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FILTER_PRESET } from "./data";
 import { IconBack, IconTriangle } from "./icons";
 import { useTheme } from "next-themes";
-import { type_SLIDER_PRESET } from "./data";
+import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 type typeOfActivatedFilters = {
   [index: string]: any[];
@@ -13,9 +13,6 @@ type typeOfActivatedFilters = {
 export default function Header(props: any) {
   const { systemTheme } = useTheme();
   const sliderRef = useRef<any>(null);
-  const [numOfFilterOption, setNumOfFilterOption] = useState<number | null>(
-    null
-  );
 
   const [activatedFilter, setActivatedFilter] = useState<string>("");
   const [isFilterDetailVisible, setIsFilterDetailVisible] =
@@ -23,11 +20,18 @@ export default function Header(props: any) {
   const [activatedFilters, setActivatedFilters] =
     useState<typeOfActivatedFilters>({});
 
+  const queryClient = useQueryClient();
+  queryClient.setQueryData(["activatedFilters"], () => activatedFilters);
+
   return (
-    <section className="top-0 z-50 w-screen dark:border-gray-500 fixed">
+    <section
+      className={`top-0 z-50 w-screen dark:border-gray-500 ${
+        props.isFixed ? "fixed" : ""
+      }`}
+    >
       {/* BASIC HEADER */}
       <div className="flex flex-row w-full justify-between items-center bg-[#F2E9DA] dark:bg-black min-h-[60px] p-2">
-        <div className="flex flex-row items-center justify-center w-full gap-2 px-2">
+        <div className="flex flex-row items-center justify-start w-full gap-1 px-2">
           {props.isBackButtonVisible && (
             <Button
               variant={"light"}
@@ -36,15 +40,22 @@ export default function Header(props: any) {
                 props.setIsModalVisible(false);
               }}
             >
-              <IconBack
-                fill={systemTheme == "dark" ? "#ffffff" : "#000000"}
-                width={"20px"}
-              ></IconBack>
+              <IconBack fill={"#000000"} width={"20px"}></IconBack>
             </Button>
           )}
-          <p className="w-full text-xl font-bold select-none text-start px-2">
-            {props.title}
-          </p>
+          {props.isLogoVisible && (
+            <Image
+              src={"/images/logo.png"}
+              width={50}
+              height={50}
+              alt="logo"
+            ></Image>
+          )}
+          {props.title && (
+            <p className="w-full text-xl font-bold select-none text-start">
+              {props.title}
+            </p>
+          )}
         </div>
       </div>
 
@@ -53,11 +64,11 @@ export default function Header(props: any) {
         <>
           {/* FILTER OPTIONS */}
           <div
-            className={`bg-white dark:bg-black flex flex-row justify-start items-center px-2 py-4 gap-2 overflow-x-auto scrollbar-hide w-[95vw] mx-auto rounded-lg mt-2 border-[#FFB2A5] border-2 ${
+            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-4 gap-2 overflow-x-auto scrollbar-hide w-[95vw] mx-auto rounded-lg mt-2 border-primary border-2 ${
               isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
             }`}
           >
-            {/* <div ref={sliderRef} className="pr-2"></div> */}
+            <div ref={sliderRef} className="pr-2"></div>
             {FILTER_PRESET.order.map((e: string, i: number) => {
               return (
                 <Button
@@ -66,7 +77,7 @@ export default function Header(props: any) {
                   variant={activatedFilters[e] != null ? "solid" : "bordered"}
                   color={activatedFilters[e] != null ? "primary" : "default"}
                   className={`border-2 min-w-fit ${
-                    activatedFilters[e] != null ? "border-[#FFB2A5]" : ""
+                    activatedFilters[e] != null ? "border-primary" : ""
                   }`}
                   radius={"full"}
                   onPress={() => {
@@ -131,12 +142,12 @@ export default function Header(props: any) {
                 </Button>
               );
             })}
-            {/* <Button
+            <Button
               variant={"light"}
               radius={"sm"}
               size={"sm"}
               color={"danger"}
-              className="min-w-fit"
+              className="min-w-fit px-2"
               onPress={() => {
                 if (
                   sliderRef.current != null &&
@@ -148,18 +159,17 @@ export default function Header(props: any) {
                     inline: "nearest",
                   });
                 }
-                props.setSelectedOptions([null, null, null, null, null]);
-                setNumOfFilterOption(null);
+                setActivatedFilters({});
               }}
             >
               필터 모두 해제하기
-            </Button> */}
+            </Button>
           </div>
 
           {/* FILTER DETAIL */}
           {isFilterDetailVisible == true && (
             <>
-              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 py-2 gap-2 flex-wrap w-[95vw] mx-auto border-[#FFB2A5] border-r-2 border-l-2">
+              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 gap-2 flex-wrap w-[95vw] mx-auto border-primary border-r-2 border-l-2">
                 {FILTER_PRESET.content[activatedFilter].type == "slider" ? (
                   <Slider
                     className="py-2"
@@ -169,7 +179,7 @@ export default function Header(props: any) {
                     defaultValue={
                       (
                         FILTER_PRESET.content[activatedFilter].items[0] as {
-                          defaultValue: number | number[] | undefined;
+                          defaultValue: number[] | undefined;
                         }
                       ).defaultValue
                     }
@@ -208,7 +218,7 @@ export default function Header(props: any) {
                         ...activatedFilters,
                       };
                       newActivatedFilters[activatedFilter] = newActivatedFilter;
-                      console.log(newActivatedFilters);
+                      // console.log(newActivatedFilters);
                       setActivatedFilters(newActivatedFilters);
                     }}
                     classNames={{
@@ -224,7 +234,7 @@ export default function Header(props: any) {
                           <Button
                             className={`border-2 ${
                               activatedFilters[activatedFilter]?.includes(item)
-                                ? "border-[#FFB2A5]"
+                                ? "border-primary"
                                 : ""
                             }`}
                             key={j}
@@ -267,7 +277,7 @@ export default function Header(props: any) {
                                   ? undefined
                                   : newActivatedFilter;
                               //
-                              console.log(newActivatedFilters);
+                              // console.log(newActivatedFilters);
                               setActivatedFilters(newActivatedFilters);
                             }}
                           >
@@ -280,39 +290,53 @@ export default function Header(props: any) {
                 )}
               </div>
               {/* FILTER CONTROL */}
-              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-2 gap-2 flex-wrap w-[95vw] mx-auto rounded-b-lg border-[#FFB2A5] border-2 border-t-0">
+              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-2 gap-2 flex-wrap w-[95vw] mx-auto rounded-b-lg border-primary border-2 border-t-0">
                 <div className="flex flex-row w-fit gap-2">
-                  {[{ text: "필터 저장" }, { text: "필터 초기화" }].map(
-                    (e, j) => {
-                      return (
-                        <Button
-                          key={j}
-                          variant={"light"}
-                          radius={"sm"}
-                          size={"sm"}
-                          color={j == 0 ? "primary" : "danger"}
-                          onPress={() => {
-                            setActivatedFilters({});
-                          }}
-                        >
-                          {e.text}
-                        </Button>
-                      );
-                    }
-                  )}
+                  {[
+                    { text: "해당 필터 저장" },
+                    { text: "해당 필터 초기화" },
+                  ].map((buttonElement, j) => {
+                    return (
+                      <Button
+                        key={j}
+                        variant={"light"}
+                        radius={"sm"}
+                        size={"sm"}
+                        color={j == 0 ? "primary" : "danger"}
+                        onPress={() => {
+                          var newActivatedFilters: any = {
+                            ...activatedFilters,
+                          };
+                          if (
+                            FILTER_PRESET.content[activatedFilter].type ===
+                            "slider"
+                          ) {
+                            newActivatedFilters[activatedFilter] = (
+                              FILTER_PRESET.content[activatedFilter]
+                                .items[0] as {
+                                defaultValue: number[] | undefined;
+                              }
+                            ).defaultValue;
+                          } else {
+                            newActivatedFilters[activatedFilter] = null;
+                          }
+                          setActivatedFilters(() => newActivatedFilters);
+                        }}
+                      >
+                        {buttonElement.text}
+                      </Button>
+                    );
+                  })}
                 </div>
                 <Button
                   isIconOnly
                   variant={"light"}
                   size={"sm"}
                   onPress={() => {
-                    setNumOfFilterOption(null);
+                    setIsFilterDetailVisible(false);
                   }}
                 >
-                  <IconTriangle
-                    fill={systemTheme == "dark" ? "#FFB2A5" : "#FFB2A5"}
-                    width={"20px"}
-                  ></IconTriangle>
+                  <IconTriangle fill={"#FF917E"} width={"15px"}></IconTriangle>
                 </Button>
               </div>
             </>
