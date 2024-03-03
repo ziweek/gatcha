@@ -2,11 +2,12 @@
 
 import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
-import BaseMap from "@/components/map";
+import BaseMap from "@/components/google-map";
 import { useState } from "react";
 import { Card, Pagination } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import KakaoMap from "@/components/kakao-map";
 
 export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -25,7 +26,8 @@ export default function Home() {
         setIsModalVisible={setIsModalVisible}
       ></Header>
       {!isModalVisible ? (
-        <BaseMap></BaseMap>
+        // <BaseMap></BaseMap>
+        <KakaoMap></KakaoMap>
       ) : (
         <div className="flex flex-col justify-start px-4 gap-2 items-center pb-12 pt-8 w-full">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((e, i) => {

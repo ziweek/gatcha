@@ -29,7 +29,7 @@ export default function Header(props: any) {
     () => setIsFilterDetailVisible
   );
 
-  const setCenter: any = queryClient.getQueryData(["setCenter"]);
+  const setCoordination: any = queryClient.getQueryData(["setCoordination"]);
 
   return (
     <section
@@ -393,7 +393,7 @@ export default function Header(props: any) {
                   //   ? JSON.stringify(location)
                   //   : "Location data not available yet.";]
                   if (location.loaded) {
-                    setCenter(location.coordinates);
+                    setCoordination(location.coordinates);
                     console.log(location.coordinates?.lat);
                     console.log(location.coordinates?.lng);
                   } else {
