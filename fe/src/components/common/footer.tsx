@@ -41,14 +41,16 @@ export default function Footer(props: any) {
         </Button>
       )}
       {props.isOneButton ? (
-        <div className="flex flex-col w-full justify-between items-center pb-8 pt-4 px-4">
-          <Button
-            isDisabled
-            isLoading={isLoading}
-            className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg"
-          >
-            {!isLoading && "32마리"}
-          </Button>
+        <div className="flex flex-col w-full justify-between items-center pb-8 pt-4 px-8">
+          {props.isTipButtonVisible && (
+            <Button
+              isDisabled
+              isLoading={isLoading}
+              className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg"
+            >
+              {!isLoading && "32마리"}
+            </Button>
+          )}
           <Button
             // isLoading={isLoading}
             radius={"sm"}

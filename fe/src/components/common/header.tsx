@@ -78,7 +78,7 @@ export default function Header(props: any) {
         <>
           {/* FILTER OPTIONS */}
           <div
-            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-4 gap-2 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
+            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
               isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
             }`}
           >
@@ -195,7 +195,7 @@ export default function Header(props: any) {
           {/* FILTER DETAIL */}
           {isFilterDetailVisible == true && (
             <>
-              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 gap-2 flex-wrap w-[92%] mx-auto border-primary border-r-2 border-l-2 ">
+              <div className="bg-white dark:bg-black flex flex-row justify-start items-center px-4 gap-1 flex-wrap w-[92%] mx-auto border-primary border-r-2 border-l-2">
                 {FILTER_PRESET.content[activatedFilter].type == "slider" ? (
                   <Slider
                     className="py-2"
@@ -315,8 +315,9 @@ export default function Header(props: any) {
                   </>
                 )}
               </div>
+
               {/* FILTER CONTROL */}
-              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-2 gap-2 flex-wrap w-[92%] mx-auto rounded-b-lg border-primary border-2 border-t-0">
+              <div className="bg-white dark:bg-black flex flex-row justify-between items-center px-4 py-1 gap-2 flex-wrap w-[92%] mx-auto rounded-b-lg border-primary border-2 border-t-0">
                 <div className="flex flex-row w-fit gap-2">
                   {[
                     { text: "해당 필터 저장" },

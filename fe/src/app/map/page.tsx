@@ -89,6 +89,7 @@ export default function Home() {
           isOneButton
           title="지도 탐색"
           buttonText="이 지역 반려견 보기"
+          isTipButtonVisible
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
         ></Footer>
