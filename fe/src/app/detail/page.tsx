@@ -33,9 +33,8 @@ export default function Detail() {
             { imgSrc: "/images/1.jpg" },
           ].map((e, i) => {
             return (
-              <div>
+              <div key={i}>
                 <Image
-                  key={i}
                   src={e.imgSrc}
                   width={100}
                   height={100}
