@@ -1,17 +1,22 @@
 import { Button, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { IconAdoption, IconCare } from "./icons";
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
 export default function Footer(props: any) {
   const router = useRouter();
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["activatedFilters"],
     queryFn: () => {},
     staleTime: Infinity,
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  const queryClient = useQueryClient();
+  const setIsFilterDetailVisible: any = queryClient.getQueryData([
+    "setIsFilterDetailVisible",
+  ]);
 
   const loadData = () => {
     const interval = setTimeout(() => {
@@ -20,7 +25,6 @@ export default function Footer(props: any) {
   };
 
   useEffect(() => {
-    // console.log(data);
     setIsLoading(true);
     loadData();
   }, [data]);
@@ -63,6 +67,7 @@ export default function Footer(props: any) {
             // endContent={isLoading && <Spinner className="opacity-0"></Spinner>}
             onPress={() => {
               props.setIsModalVisible(!props.isModalVisible);
+              setIsFilterDetailVisible(false);
             }}
           >
             {props.buttonText}

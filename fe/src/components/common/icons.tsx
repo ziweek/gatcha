@@ -385,24 +385,24 @@ export const IconStatistic = (props: IconProps) => {
           <path
             d="M21 12V6.71888C21 4.52896 21 3.434 20.2927 2.83487C19.5855 2.23574 18.5045 2.41591 16.3424 2.77626L15.288 2.95199C13.6477 3.22537 12.8276 3.36205 12 3.36205C11.1724 3.36205 10.3523 3.22537 8.71202 2.95199L7.6576 2.77626C5.49553 2.41591 4.4145 2.23574 3.70725 2.83487C3 3.434 3 4.52896 3 6.71888V12C3 17.4903 7.23896 20.1547 9.89856 21.286C10.62 21.5929 10.9807 21.7464 12 21.7464C13.0193 21.7464 13.38 21.5929 14.1014 21.286C16.761 20.1547 21 17.4903 21 12Z"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
           />
           <path
             d="M6.5 9C6.79112 8.4174 7.57665 8 8.5 8C9.42335 8 10.2089 8.4174 10.5 9"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M13.5 9C13.7911 8.4174 14.5766 8 15.5 8C16.4234 8 17.2089 8.4174 17.5 9"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M8.5 15C8.5 15 9.55 14 12 14C14.45 14 15.5 15 15.5 15"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
         </svg>
@@ -459,24 +459,24 @@ export const IconLove = (props: IconProps) => {
           <path
             d="M21 12V6.71888C21 4.52896 21 3.434 20.2927 2.83487C19.5855 2.23574 18.5045 2.41591 16.3424 2.77626L15.288 2.95199C13.6477 3.22537 12.8276 3.36205 12 3.36205C11.1724 3.36205 10.3523 3.22537 8.71202 2.95199L7.6576 2.77626C5.49553 2.41591 4.4145 2.23574 3.70725 2.83487C3 3.434 3 4.52896 3 6.71888V12C3 17.4903 7.23896 20.1547 9.89856 21.286C10.62 21.5929 10.9807 21.7464 12 21.7464C13.0193 21.7464 13.38 21.5929 14.1014 21.286C16.761 20.1547 21 17.4903 21 12Z"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
           />
           <path
             d="M6.5 9C6.79112 8.4174 7.57665 8 8.5 8C9.42335 8 10.2089 8.4174 10.5 9"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M13.5 9C13.7911 8.4174 14.5766 8 15.5 8C16.4234 8 17.2089 8.4174 17.5 9"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M8.5 14C8.5 14 9.55 15 12 15C14.45 15 15.5 14 15.5 14"
             stroke={props.fill}
-            stroke-width="1.5"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
         </svg>
@@ -670,7 +670,7 @@ export const IconTriangle = (props: IconProps) => {
           <title>1236</title>
 
           <defs></defs>
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
             <path
               d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
               fill={props.fill || "#080341"}
@@ -691,7 +691,7 @@ export const IconTriangle = (props: IconProps) => {
           <title>1236</title>
 
           <defs></defs>
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
             <path
               d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
               fill={props.fill || "#080341"}
@@ -754,36 +754,36 @@ export const IconGPS = (props: IconProps) => {
           <path
             d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
+            strokeWidth={props.strokeWidth || 2}
           />
           <path
             d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
+            strokeWidth={props.strokeWidth || 2}
           />
           <path
             d="M2 12L4 12"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M20 12L22 12"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M12 4V2"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M12 22V20"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
         </svg>
       ) : (
@@ -797,36 +797,36 @@ export const IconGPS = (props: IconProps) => {
           <path
             d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
+            strokeWidth={props.strokeWidth || 2}
           />
           <path
             d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
+            strokeWidth={props.strokeWidth || 2}
           />
           <path
             d="M2 12L4 12"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M20 12L22 12"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M12 4V2"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
           <path
             d="M12 22V20"
             stroke={props.fill || "#080341"}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth={props.strokeWidth || 2}
+            strokeLinecap="round"
           />
         </svg>
       )}

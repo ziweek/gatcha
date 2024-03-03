@@ -4,15 +4,17 @@ import { FILTER_PRESET } from "./data";
 import { IconBack, IconFilter, IconGPS, IconTriangle } from "./icons";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import useGeolocation from "@/hooks/useGeolocation";
 
 type typeOfActivatedFilters = {
   [index: string]: any[];
 };
 
 export default function Header(props: any) {
-  const { systemTheme } = useTheme();
-  const sliderRef = useRef<any>(null);
+  // const { systemTheme } = useTheme();
+  // const sliderRef = useRef<any>(null);
+  const location = useGeolocation();
 
   const [activatedFilter, setActivatedFilter] = useState<string>("");
   const [isFilterDetailVisible, setIsFilterDetailVisible] =
@@ -22,6 +24,12 @@ export default function Header(props: any) {
 
   const queryClient = useQueryClient();
   queryClient.setQueryData(["activatedFilters"], () => activatedFilters);
+  queryClient.setQueryData(
+    ["setIsFilterDetailVisible"],
+    () => setIsFilterDetailVisible
+  );
+
+  const setCenter: any = queryClient.getQueryData(["setCenter"]);
 
   return (
     <section
@@ -38,6 +46,7 @@ export default function Header(props: any) {
               isIconOnly
               onPress={() => {
                 props.setIsModalVisible(false);
+                setIsFilterDetailVisible(false);
               }}
             >
               <IconBack fill={"#000000"} width={"20px"}></IconBack>
@@ -78,11 +87,11 @@ export default function Header(props: any) {
         <>
           {/* FILTER OPTIONS */}
           <div
-            className={`bg-white dark:bg-black flex flex-row justify-start items-center py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
+            className={`bg-white dark:bg-black flex flex-row justify-start items-center px-4 py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
               isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
             }`}
           >
-            <div ref={sliderRef} className="pr-2"></div>
+            {/* <div ref={sliderRef} className="pr-2"></div> */}
             <div>
               <IconFilter
                 width={25}
@@ -168,7 +177,7 @@ export default function Header(props: any) {
                 </Button>
               );
             })}
-            <Button
+            {/* <Button
               variant={"light"}
               radius={"sm"}
               size={"sm"}
@@ -189,7 +198,7 @@ export default function Header(props: any) {
               }}
             >
               필터 모두 해제하기
-            </Button>
+            </Button> */}
           </div>
 
           {/* FILTER DETAIL */}
@@ -329,6 +338,7 @@ export default function Header(props: any) {
                         variant={"light"}
                         radius={"sm"}
                         size={"sm"}
+                        disableAnimation
                         color={j == 0 ? "primary" : "danger"}
                         onPress={() => {
                           var newActivatedFilters: any = {
@@ -373,12 +383,29 @@ export default function Header(props: any) {
           {props.isGpsVisible && (
             <div className="w-full flex flex-col items-end px-4 pt-2">
               <Button
+                isLoading={!location.loaded}
                 isIconOnly
                 variant={"solid"}
                 radius={"sm"}
-                className="bg-white border-primary border-1 drop-shadow-md"
+                className="bg-white border-primary border-2 drop-shadow-md opacity-100"
+                onPress={() => {
+                  // const aaa = location.loaded
+                  //   ? JSON.stringify(location)
+                  //   : "Location data not available yet.";]
+                  if (location.loaded) {
+                    setCenter(location.coordinates);
+                    console.log(location.coordinates?.lat);
+                    console.log(location.coordinates?.lng);
+                  } else {
+                    console.log("로딩중..");
+                  }
+                }}
               >
-                <IconGPS fill="#FF917E" width={"27px"}></IconGPS>
+                <IconGPS
+                  fill="#FF917E"
+                  width={"27px"}
+                  strokeWidth={2}
+                ></IconGPS>
               </Button>
             </div>
           )}

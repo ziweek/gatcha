@@ -27,33 +27,24 @@ export default function Detail() {
           </Button>
         </div>
         <Carousel autoPlay>
-          <div>
-            <Image
-              src="/images/landing-dog2.jpg"
-              width={100}
-              height={100}
-              className="h-[300px] object-cover object-center"
-              alt="a"
-            />
-          </div>
-          <div>
-            <Image
-              src="/images/landing-dog.jpg"
-              width={100}
-              height={100}
-              className="h-[300px] object-cover object-center"
-              alt="a"
-            />
-          </div>
-          <div>
-            <Image
-              src="/images/1.jpg"
-              width={100}
-              height={100}
-              className="h-[300px] object-cover object-center"
-              alt="a"
-            />
-          </div>
+          {[
+            { imgSrc: "/images/landing-dog2.jpg" },
+            { imgSrc: "/images/landing-dog.jpg" },
+            { imgSrc: "/images/1.jpg" },
+          ].map((e, i) => {
+            return (
+              <div>
+                <Image
+                  key={i}
+                  src={e.imgSrc}
+                  width={100}
+                  height={100}
+                  className="h-[300px] object-cover object-center"
+                  alt="a"
+                />
+              </div>
+            );
+          })}
         </Carousel>
         <div className="flex flex-col w-full h-fit gap-8">
           <div className="gap-2 flex flex-col items-start justify-between h-full px-4">

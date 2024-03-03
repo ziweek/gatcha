@@ -32,7 +32,7 @@ export default function Home() {
             return (
               <Card
                 key={i}
-                className="w-full flex h-min flex-col justify-center p-2"
+                className="w-full flex h-full flex-col justify-between p-2"
                 shadow={"none"}
                 fullWidth
                 isPressable
@@ -41,18 +41,15 @@ export default function Home() {
                   router.push("/detail");
                 }}
               >
-                <div
-                  className="w-full flex flex-row justify-between items-center gap-2"
-                  // style={{ display: "grid", gridTemplateColumns: "auto 1fr" }}
-                >
+                <div className="w-full flex flex-row justify-between items-center gap-1 h-full">
                   <Image
                     src={"/images/landing-dog.jpg"}
                     width="50"
                     height="50"
                     alt="dog"
-                    className="object-cover rounded-xl w-[80px] h-[80px] aspect-square"
+                    className="object-cover rounded-xl w-[100px] h-[100px] aspect-square"
                   ></Image>
-                  <div className="p-2 gap-2 flex flex-row items-start justify-between h-full w-full">
+                  <div className="px-2 gap-2 flex flex-row items-start justify-start h-full w-full">
                     <div className="flex flex-col gap-1/2 justify-between items-start w-full h-full">
                       <p className="text-md font-bold">요크셔테리어</p>
                       <div className="flex flex-row gap-1">
@@ -67,8 +64,10 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col gap-1/2 justify-between items-end min-w-fit h-full">
                       <p className="text-lg font-bold">25만원</p>
-                      <p className="text-red-400 text-tiny">안심입양</p>
-                      <p className="text-tiny">입양사고 보장</p>
+                      <p className="text-primary text-tiny font-semibold pt-5">
+                        안심입양
+                      </p>
+                      <p className="text-tiny text-primary">입양사고 보장</p>
                     </div>
                   </div>
                 </div>

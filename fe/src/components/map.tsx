@@ -9,25 +9,13 @@ import {
 } from "@react-google-maps/api";
 import { useCallback, useRef, useState } from "react";
 import { useTheme } from "next-themes";
-import {
-  Card,
-  Progress,
-  ScrollShadow,
-  Chip,
-  Divider,
-  Spinner,
-} from "@nextui-org/react";
-import Image from "next/image";
+import { Spinner } from "@nextui-org/react";
+import { useQueryClient } from "@tanstack/react-query";
 
 const containerStyle = {
   width: "100%",
   height: "100%",
 };
-
-// const center = {
-//   lat: 33.3846,
-//   lng: 126.5535,
-// };
 
 function getRandomDateWithinPastYear(): string {
   const today = new Date();
@@ -616,6 +604,8 @@ export default function BaseMap() {
     lat: 37.4979278,
     lng: 127.0275833,
   });
+  const queryClient = useQueryClient();
+  queryClient.setQueryData(["setCenter"], () => setCenter);
   const [zoom, setZoom] = useState<number>(13);
   const { systemTheme } = useTheme();
   const { isLoaded } = useJsApiLoader({
@@ -677,6 +667,10 @@ export default function BaseMap() {
           zoom={zoom}
           onLoad={onLoad}
           onUnmount={onUnmount}
+          onDragEnd={() => {
+            // isDefined && console.log(mapRef.current.state.map.center);
+            isDefined && setCenter(mapRef.current.state.map.center);
+          }}
           options={{
             streetViewControl: false,
             zoomControl: false,
