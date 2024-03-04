@@ -50,7 +50,7 @@ export default function Footer(props: any) {
             <Button
               isDisabled
               isLoading={isLoading}
-              className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg"
+              className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold min-w-[80px]"
             >
               {!isLoading && "32마리"}
             </Button>

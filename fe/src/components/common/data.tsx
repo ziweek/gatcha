@@ -163,7 +163,7 @@ export const templateForSelectedFilterOptions = {
 };
 
 export const START_COORDINATION = {
-  lat: 37.4979278,
+  lat: 37.5879278,
   lng: 127.0275833,
 };
 

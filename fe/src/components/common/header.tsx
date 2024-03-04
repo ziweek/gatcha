@@ -389,9 +389,6 @@ export default function Header(props: any) {
                 radius={"sm"}
                 className="bg-white border-primary border-2 drop-shadow-md opacity-100"
                 onPress={() => {
-                  // const aaa = location.loaded
-                  //   ? JSON.stringify(location)
-                  //   : "Location data not available yet.";]
                   if (location.loaded) {
                     setCoordination(location.coordinates);
                     console.log(location.coordinates?.lat);

@@ -16,6 +16,7 @@ export default function KakaoMap() {
   queryClient.setQueryData(["setCoordination"], () => setCoordination);
 
   const [loaded, setLoaded] = useState(isAlreadyLoaded);
+  const [level, setLevel] = useState(3);
 
   return (
     <>
@@ -29,7 +30,19 @@ export default function KakaoMap() {
         }} // 동적으로 로드
       />
       {loaded && (
-        <Map center={coordination} className="w-screen h-screen">
+        <Map
+          isPanto={true}
+          level={level}
+          center={coordination}
+          className="w-screen h-screen"
+          onCenterChanged={(target) => {
+            const newCenter = {
+              lat: target.getCenter().getLat(),
+              lng: target.getCenter().getLng(),
+            };
+            setCoordination(newCenter);
+          }}
+        >
           <MarkerClusterer
             averageCenter={true}
             minLevel={0}
@@ -43,16 +56,7 @@ export default function KakaoMap() {
                 textAlign: "center",
                 fontWeight: "bold",
                 lineHeight: "31px",
-              },
-              {
-                width: "40px",
-                height: "40px",
-                background: "#FF917E",
-                borderRadius: "20px",
-                color: "#fff",
-                textAlign: "center",
-                fontWeight: "bold",
-                lineHeight: "41px",
+                boxShadow: "3px 3px 3px #00000030",
               },
               {
                 width: "50px",
@@ -63,13 +67,32 @@ export default function KakaoMap() {
                 textAlign: "center",
                 fontWeight: "bold",
                 lineHeight: "51px",
+                boxShadow: "3px 3px 3px #00000030",
+              },
+              {
+                width: "70px",
+                height: "70px",
+                background: "#FF917E",
+                borderRadius: "35px",
+                color: "#fff",
+                textAlign: "center",
+                fontWeight: "bold",
+                lineHeight: "71px",
+                boxShadow: "3px 3px 3px #00000030",
               },
             ]}
           >
             {DUMMY_MARKER.map((pos) => (
               <MapMarker
+                image={{
+                  src: "/images/markerIcon.png",
+                  size: { width: 25, height: 25 },
+                }}
                 key={`${pos.lat}-${pos.lng}`}
                 position={{ lat: pos.lat, lng: pos.lng }}
+                onClick={(marker) => {
+                  setCoordination({ lat: pos.lat, lng: pos.lng });
+                }}
               />
             ))}
           </MarkerClusterer>
