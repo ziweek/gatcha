@@ -131,7 +131,7 @@ export default function Header(props: any) {
                   size={"sm"}
                   variant={activatedFilters[e] != null ? "solid" : "bordered"}
                   color={activatedFilters[e] != null ? "primary" : "default"}
-                  className={`border-2 min-w-fit ${
+                  className={`border-2 min-w-fit shadow-none ${
                     activatedFilters[e] != null ? "border-primary" : ""
                   }`}
                   radius={"full"}
@@ -287,7 +287,7 @@ export default function Header(props: any) {
                       (item: string | number | any, j: number) => {
                         return (
                           <Button
-                            className={`border-2 ${
+                            className={`border-2 shadow-none ${
                               activatedFilters[activatedFilter]?.includes(item)
                                 ? "border-primary"
                                 : ""
