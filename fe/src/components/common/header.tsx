@@ -13,7 +13,7 @@ type typeOfActivatedFilters = {
 
 export default function Header(props: any) {
   // const { systemTheme } = useTheme();
-  // const sliderRef = useRef<any>(null);
+  const sliderRef = useRef<any>(null);
   const location = useGeolocation();
 
   const [activatedFilter, setActivatedFilter] = useState<string>("");
@@ -28,6 +28,17 @@ export default function Header(props: any) {
     ["setIsFilterDetailVisible"],
     () => setIsFilterDetailVisible
   );
+  queryClient.setQueryData(["sliderRef"], () => sliderRef);
+
+  // function scrollToLeft(sliderRef: any) {
+  //   if (sliderRef != null && sliderRef != undefined) {
+  //     sliderRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "nearest",
+  //       inline: "nearest",
+  //     });
+  //   }
+  // }
 
   const setCoordination: any = queryClient.getQueryData(["setCoordination"]);
 
@@ -38,7 +49,7 @@ export default function Header(props: any) {
       }`}
     >
       {/* BASIC HEADER */}
-      <div className="flex flex-row w-full justify-between items-center bg-[#F2E9DA] dark:bg-black min-h-[60px] p-2">
+      <div className="flex flex-row w-full justify-between items-center bg-white dark:bg-black min-h-[60px] p-2 drop-shadow-md">
         <div className="flex flex-row items-center justify-between w-full gap-1 px-2">
           {props.isBackButtonVisible && (
             <Button
@@ -47,6 +58,13 @@ export default function Header(props: any) {
               onPress={() => {
                 props.setIsModalVisible(false);
                 setIsFilterDetailVisible(false);
+                if (sliderRef != null && sliderRef != undefined) {
+                  sliderRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest",
+                  });
+                }
               }}
             >
               <IconBack fill={"#000000"} width={"20px"}></IconBack>
@@ -87,11 +105,13 @@ export default function Header(props: any) {
         <>
           {/* FILTER OPTIONS */}
           <div
-            className={`bg-white dark:bg-black flex flex-row justify-start items-center px-4 py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
-              isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
+            className={`bg-white dark:bg-black flex flex-row justify-start items-center pr-2 py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
+              isFilterDetailVisible == true
+                ? "border-b-0 rounded-b-none"
+                : "drop-shadow-md"
             }`}
           >
-            {/* <div ref={sliderRef} className="pr-2"></div> */}
+            <div ref={sliderRef} className="pr-2"></div>
             <div>
               <IconFilter
                 width={25}

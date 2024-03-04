@@ -16,7 +16,7 @@ export default function KakaoMap() {
   queryClient.setQueryData(["setCoordination"], () => setCoordination);
 
   const [loaded, setLoaded] = useState(isAlreadyLoaded);
-  const [level, setLevel] = useState(3);
+  const [level, setLevel] = useState(8);
 
   return (
     <>

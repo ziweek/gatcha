@@ -17,6 +17,7 @@ export default function Footer(props: any) {
   const setIsFilterDetailVisible: any = queryClient.getQueryData([
     "setIsFilterDetailVisible",
   ]);
+  const sliderRef: any = queryClient.getQueryData(["sliderRef"]);
 
   const loadData = () => {
     const interval = setTimeout(() => {
@@ -68,6 +69,13 @@ export default function Footer(props: any) {
             onPress={() => {
               props.setIsModalVisible(!props.isModalVisible);
               setIsFilterDetailVisible(false);
+              if (sliderRef != null && sliderRef != undefined) {
+                sliderRef.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                  inline: "nearest",
+                });
+              }
             }}
           >
             {props.buttonText}

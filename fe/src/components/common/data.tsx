@@ -163,8 +163,8 @@ export const templateForSelectedFilterOptions = {
 };
 
 export const START_COORDINATION = {
-  lat: 37.5879278,
-  lng: 127.0275833,
+  lat: 37.552987017,
+  lng: 126.972591728,
 };
 
 export const DUMMY_MARKER = [

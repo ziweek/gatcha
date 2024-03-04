@@ -29,7 +29,7 @@ export default function Home() {
         // <BaseMap></BaseMap>
         <KakaoMap></KakaoMap>
       ) : (
-        <div className="flex flex-col justify-start px-4 gap-2 items-center pb-12 pt-8 w-full">
+        <div className="flex flex-col justify-start px-4 gap-2 items-center pb-12 pt-4 w-full">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((e, i) => {
             return (
               <Card
@@ -53,23 +53,23 @@ export default function Home() {
                   ></Image>
                   <div className="px-2 gap-2 flex flex-row items-start justify-start h-full w-full">
                     <div className="flex flex-col gap-1/2 justify-between items-start w-full h-full">
-                      <p className="text-md font-bold">요크셔테리어</p>
+                      <p className="font-bold">요크셔테리어</p>
                       <div className="flex flex-row gap-1">
                         <p className="text-tiny">남자아이</p>
                         <p className="text-tiny">3개월령</p>
                       </div>
-                      <p className="text-tiny line-clamp-2 text-start pt-2">
+                      <p className="text-[0.75rem] line-clamp-2 text-start pt-2 leading-tight">
                         우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고
                         좋아요 우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도
                         잘벌고 좋아요
                       </p>
                     </div>
                     <div className="flex flex-col gap-1/2 justify-between items-end min-w-fit h-full">
-                      <p className="text-lg font-bold">25만원</p>
-                      <p className="text-primary text-tiny font-semibold pt-5">
+                      <p className="font-bold text-primary">25만원</p>
+                      <p className="text-green-600 text-tiny font-semibold pt-5">
                         안심입양
                       </p>
-                      <p className="text-tiny text-primary">입양사고 보장</p>
+                      <p className="text-tiny text-green-600">입양사고 보장</p>
                     </div>
                   </div>
                 </div>
