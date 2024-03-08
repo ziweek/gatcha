@@ -2,9 +2,10 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import Script from "next/script";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import { DUMMY_MARKER, START_COORDINATION } from "./common/data";
+import { CircularProgress } from "@nextui-org/react";
 
 let isAlreadyLoaded = false;
 
@@ -12,29 +13,43 @@ export default function KakaoMap() {
   const [coordination, setCoordination] = useState(START_COORDINATION);
   const key = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
 
+  const [loaded, setLoaded] = useState(isAlreadyLoaded);
+  const [level, setLevel] = useState(8);
+  const [currentBounds, setCurrentBounds] = useState<any>();
+  const mapRef = useRef<kakao.maps.Map>(null);
+
   const queryClient = useQueryClient();
   queryClient.setQueryData(["setCoordination"], () => setCoordination);
 
-  const [loaded, setLoaded] = useState(isAlreadyLoaded);
-  const [level, setLevel] = useState(8);
+  useEffect(() => {
+    kakao.maps.load(() => {
+      isAlreadyLoaded = true;
+      setLoaded(true);
+    });
+  }, []);
 
   return (
     <>
       <Script
         src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=clusterer`}
-        onLoad={() => {
-          kakao.maps.load(() => {
-            isAlreadyLoaded = true;
-            setLoaded(true);
-          });
-        }} // 동적으로 로드
+        strategy="beforeInteractive"
       />
-      {loaded && (
+      {loaded ? (
         <Map
+          onTileLoaded={() => {
+            if (mapRef.current != null && mapRef.current != undefined) {
+              setCurrentBounds(mapRef.current.getBounds());
+            }
+          }}
+          ref={mapRef}
           isPanto={true}
           level={level}
           center={coordination}
           className="w-screen h-screen"
+          onBoundsChanged={(target) => {
+            const newBounds = target.getBounds();
+            setCurrentBounds(newBounds);
+          }}
           onCenterChanged={(target) => {
             const newCenter = {
               lat: target.getCenter().getLat(),
@@ -45,7 +60,7 @@ export default function KakaoMap() {
         >
           <MarkerClusterer
             averageCenter={true}
-            minLevel={0}
+            minLevel={5}
             styles={[
               {
                 width: "30px",
@@ -82,7 +97,11 @@ export default function KakaoMap() {
               },
             ]}
           >
-            {DUMMY_MARKER.map((pos) => (
+            {DUMMY_MARKER.filter((marker) =>
+              currentBounds?.contain(
+                new kakao.maps.LatLng(marker.lat, marker.lng)
+              )
+            ).map((pos) => (
               <MapMarker
                 image={{
                   src: "/images/markerIcon.png",
@@ -97,6 +116,8 @@ export default function KakaoMap() {
             ))}
           </MarkerClusterer>
         </Map>
+      ) : (
+        <CircularProgress></CircularProgress>
       )}
     </>
   );

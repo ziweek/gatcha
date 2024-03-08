@@ -18,6 +18,7 @@ export default function Footer(props: any) {
     "setIsFilterDetailVisible",
   ]);
   const sliderRef: any = queryClient.getQueryData(["sliderRef"]);
+  const numOfMarkers: any = queryClient.getQueryData(["numOfMarkers"]);
 
   const loadData = () => {
     const interval = setTimeout(() => {
@@ -53,7 +54,8 @@ export default function Footer(props: any) {
               isLoading={isLoading}
               className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold min-w-[80px]"
             >
-              {!isLoading && "32마리"}
+              {!isLoading && numOfMarkers != undefined ? numOfMarkers : 0} 마리
+              탐색
             </Button>
           )}
           <Button
