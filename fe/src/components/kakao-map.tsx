@@ -27,20 +27,17 @@ export default function KakaoMap() {
     )
   );
 
-  useEffect(() => {
-    if (kakao != undefined) {
-      kakao.maps.load(() => {
-        isAlreadyLoaded = true;
-        setLoaded(true);
-      });
-    }
-  }, []);
-
   return (
     <>
       <Script
         src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=clusterer`}
         strategy="beforeInteractive"
+        onLoad={() => {
+          kakao.maps.load(() => {
+            isAlreadyLoaded = true;
+            setLoaded(true);
+          });
+        }}
       />
       {loaded ? (
         <Map

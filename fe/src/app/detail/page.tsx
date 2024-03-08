@@ -66,16 +66,27 @@ export default function Detail() {
               우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고 좋아요
             </p>
           </div>
-          <div className="bg-blue-200 h-[200px] w-full">
-            <div className="flex flex-row justify-around items-center h-full w-full">
-              {[1, 2, 3].map((e, i) => (
-                <div
-                  key={i}
-                  className="flex rounded-full h-[100px] aspect-square bg-primary"
-                >
-                  {e}
+          <div className="bg-primary/25 h-full p-4 w-full">
+            <div className="flex flex-col items-center w-full h-full gap-4">
+              <div className="flex flex-row justify-start w-full">
+                <div className="flex flex-col justify-start w-full">
+                  <p> 3대 입양 사고에 대해 100% 보장</p>
+                  <p> 3대 입양 사고에 대해 100% 보장</p>
+                  <p> 3대 입양 사고에 대해 100% 보장</p>
                 </div>
-              ))}
+                <div>더 알아보기</div>
+              </div>
+              <div className="flex flex-row justify-around items-center h-full w-full">
+                {["건강보장", "품종보장", "가격보장"].map((e, i) => (
+                  <div
+                    key={i}
+                    className="flex rounded-full h-[100px] aspect-square bg-primary flex-col justify-center items-center text-white font-bold"
+                  >
+                    {e}
+                  </div>
+                ))}
+              </div>
+              <div>3대 입양 사고에 대해 100% 보장</div>
             </div>
           </div>
           <div className="h-[500px] w-full"></div>
