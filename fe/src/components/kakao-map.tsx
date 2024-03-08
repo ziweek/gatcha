@@ -31,7 +31,7 @@ export default function KakaoMap() {
     <>
       <Script
         src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=clusterer`}
-        strategy="beforeInteractive"
+        // strategy="beforeInteractive"
         onLoad={() => {
           kakao.maps.load(() => {
             isAlreadyLoaded = true;
@@ -39,6 +39,7 @@ export default function KakaoMap() {
           });
         }}
       />
+
       {loaded ? (
         <Map
           onTileLoaded={() => {

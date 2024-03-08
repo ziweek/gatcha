@@ -3,7 +3,7 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Image from "next/image";
-import { Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import Footer from "@/components/common/footer";
 import { useRouter } from "next/navigation";
 
@@ -66,15 +66,24 @@ export default function Detail() {
               우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고 좋아요
             </p>
           </div>
-          <div className="bg-primary/25 h-full p-4 w-full">
+          <div className="bg-primary/25 h-full py-4 px-8 w-full">
             <div className="flex flex-col items-center w-full h-full gap-4">
               <div className="flex flex-row justify-start w-full">
-                <div className="flex flex-col justify-start w-full">
-                  <p> 3대 입양 사고에 대해 100% 보장</p>
-                  <p> 3대 입양 사고에 대해 100% 보장</p>
-                  <p> 3대 입양 사고에 대해 100% 보장</p>
+                <div className="flex flex-col justify-start w-full gap-2">
+                  <p className="font-semibold text-primary">
+                    입양사고 책임 보장
+                  </p>
+                  <p className="text-tiny">
+                    똑똑과 업체의 계약서 공동 날인으로<br></br>입양사고에 대해
+                    100% 책임을 집니다.
+                  </p>
                 </div>
-                <div>더 알아보기</div>
+                <Link
+                  size={"sm"}
+                  className="min-w-fit h-full underline text-blue-500"
+                >
+                  더 알아보기
+                </Link>
               </div>
               <div className="flex flex-row justify-around items-center h-full w-full">
                 {["건강보장", "품종보장", "가격보장"].map((e, i) => (
@@ -86,7 +95,7 @@ export default function Detail() {
                   </div>
                 ))}
               </div>
-              <div>3대 입양 사고에 대해 100% 보장</div>
+              <div className="font-bold">3대 입양 사고에 대해 100% 보장</div>
             </div>
           </div>
           <div className="h-[500px] w-full"></div>
