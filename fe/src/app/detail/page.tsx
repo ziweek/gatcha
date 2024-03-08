@@ -19,6 +19,7 @@ export default function Detail() {
             isIconOnly
             radius={"full"}
             className="font-bold"
+            color={"primary"}
             onPress={() => {
               router.back();
             }}
@@ -26,14 +27,14 @@ export default function Detail() {
             {"<"}
           </Button>
         </div>
-        <Carousel autoPlay>
+        <Carousel autoPlay dynamicHeight showThumbs={false}>
           {[
             { imgSrc: "/images/landing-dog2.jpg" },
             { imgSrc: "/images/landing-dog.jpg" },
             { imgSrc: "/images/1.jpg" },
           ].map((e, i) => {
             return (
-              <div key={i}>
+              <div key={i} className="h-full">
                 <Image
                   src={e.imgSrc}
                   width={100}
@@ -45,7 +46,8 @@ export default function Detail() {
             );
           })}
         </Carousel>
-        <div className="flex flex-col w-full h-fit gap-8">
+        <div className="flex flex-col w-full h-fit gap-8 py-8">
+          {/*  */}
           <div className="gap-2 flex flex-col items-start justify-between h-full px-4">
             <div className="flex flex-row justify-between w-full items-center">
               <div className="flex flex-row gap-1 justify-start items-center">
@@ -60,17 +62,8 @@ export default function Detail() {
               <p className="text-sm">남자아이</p>
               <p className="text-sm">3개월령</p>
             </div>
-            <Textarea
-              className="min-h-full"
-              variant={"bordered"}
-              height={"full"}
-              defaultValue={`안녕하세요!\n\n🐾 🌈 반려견의 행복과 따뜻한 가족을 찾아주실 분을 기다리고 있는 소중한 생명이 있습니다. 바로 저희가 자랑스럽게 소개하는 웰시코기 말티즈 혼종이에요. \n\n코코는 활기차고 호기심 가득한 성격으로 주변을 밝게 비춰줄 작은 햇볕 같은 존재에요. 사람들과의 소통을 즐기며, 애정 어린 눈빛으로 주인을 향해 다가가곤 합니다. 놀이와 산책을 좋아하며, 적극적으로 활동적인 생활을 즐깁니다. 물론, 소파에 풀죽어 누워 마음의 평화를 찾는 것도 즐겨하는 달콤한 고양이처럼 귀엽기도 해요.`}
-              classNames={{
-                input: "whitespace-normal text-md min-w-full",
-                mainWrapper: "border-0",
-              }}
-            ></Textarea>
           </div>
+          {/*  */}
           <div className="bg-primary/25 h-full py-4 px-8 w-full">
             <div className="flex flex-col items-center w-full h-full gap-4">
               <div className="flex flex-row justify-start w-full">
@@ -103,7 +96,21 @@ export default function Detail() {
               <div className="font-bold">3대 입양 사고에 대해 100% 보장</div>
             </div>
           </div>
-          <div className="h-[500px] w-full"></div>
+          {/*  */}
+          <div className="h-full w-full px-4">
+            <Textarea
+              className="px-4 h-full"
+              height={"100%"}
+              variant={"underlined"}
+              disableAutosize
+              readOnly
+              value={`안녕하세요!\n\n🐾 🌈 반려견의 행복과 따뜻한 가족을 찾아주실 분을 기다리고 있는 소중한 생명이 있습니다. 바로 저희가 자랑스럽게 소개하는 웰시코기 말티즈 혼종이에요. \n\n코코는 활기차고 호기심 가득한 성격으로 주변을 밝게 비춰줄 작은 햇볕 같은 존재에요. 사람들과의 소통을 즐기며, 애정 어린 눈빛으로 주인을 향해 다가가곤 합니다. 놀이와 산책을 좋아하며, 적극적으로 활동적인 생활을 즐깁니다. 물론, 소파에 풀죽어 누워 마음의 평화를 찾는 것도 즐겨하는 달콤한 고양이처럼 귀엽기도 해요.`}
+              classNames={{
+                input: "text-md leading-loose min-h-[500px] h-full",
+                inputWrapper: "border-transparent",
+              }}
+            ></Textarea>
+          </div>
         </div>
       </div>
       <Footer isOneButton buttonText={"문의하기"}></Footer>

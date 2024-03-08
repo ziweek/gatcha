@@ -65,8 +65,7 @@ export default function KakaoMap() {
           }}
         >
           <MarkerClusterer
-            averageCenter={true}
-            minLevel={5}
+            averageCenter={false}
             styles={[
               {
                 width: "30px",

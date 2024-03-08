@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useGeolocation from "@/hooks/useGeolocation";
+import SearchBar from "../search-bar";
 
 type typeOfActivatedFilters = {
   [index: string]: any[];
@@ -70,14 +71,16 @@ export default function Header(props: any) {
               <IconBack fill={"#000000"} width={"20px"}></IconBack>
             </Button>
           )}
+          {/*  */}
           {props.isLogoVisible && (
             <Image
               src={"/images/logo.png"}
-              width={50}
-              height={50}
+              width={45}
+              height={45}
               alt="logo"
             ></Image>
           )}
+          {props.isSearchBarVisible && <SearchBar></SearchBar>}
           {props.title && (
             <>
               <p className="w-full text-xl font-bold select-none text-center">
@@ -106,9 +109,7 @@ export default function Header(props: any) {
           {/* FILTER OPTIONS */}
           <div
             className={`bg-white dark:bg-black flex flex-row justify-start items-center pr-2 py-2 gap-1 overflow-x-auto scrollbar-hide w-[92%] mx-auto rounded-lg mt-2 border-primary border-2 ${
-              isFilterDetailVisible == true
-                ? "border-b-0 rounded-b-none"
-                : "drop-shadow-md"
+              isFilterDetailVisible == true ? "border-b-0 rounded-b-none" : ""
             }`}
           >
             <div ref={sliderRef} className="pr-2"></div>

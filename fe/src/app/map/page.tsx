@@ -16,6 +16,7 @@ export default function Home() {
   return (
     <section className="z-0 flex flex-col items-center justify-center w-full bg-secondary">
       <Header
+        isSearchBarVisible={!isModalVisible}
         isFixed={!isModalVisible}
         isLogoVisible={!isModalVisible}
         isGpsVisible={!isModalVisible}
