@@ -3,7 +3,7 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Image from "next/image";
-import { Button, Link } from "@nextui-org/react";
+import { Button, Link, Textarea } from "@nextui-org/react";
 import Footer from "@/components/common/footer";
 import { useRouter } from "next/navigation";
 
@@ -60,11 +60,16 @@ export default function Detail() {
               <p className="text-sm">남자아이</p>
               <p className="text-sm">3개월령</p>
             </div>
-            <p className="text-sm line-clamp-3 w-full text-start">
-              우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고 좋아요.
-              우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고 좋아요.
-              우리 강아지 짱짱 착하고 꽤나 귀엽고 심지어 돈도 잘벌고 좋아요
-            </p>
+            <Textarea
+              className="min-h-full"
+              variant={"bordered"}
+              height={"full"}
+              defaultValue={`안녕하세요!\n\n🐾 🌈 반려견의 행복과 따뜻한 가족을 찾아주실 분을 기다리고 있는 소중한 생명이 있습니다. 바로 저희가 자랑스럽게 소개하는 웰시코기 말티즈 혼종이에요. \n\n코코는 활기차고 호기심 가득한 성격으로 주변을 밝게 비춰줄 작은 햇볕 같은 존재에요. 사람들과의 소통을 즐기며, 애정 어린 눈빛으로 주인을 향해 다가가곤 합니다. 놀이와 산책을 좋아하며, 적극적으로 활동적인 생활을 즐깁니다. 물론, 소파에 풀죽어 누워 마음의 평화를 찾는 것도 즐겨하는 달콤한 고양이처럼 귀엽기도 해요.`}
+              classNames={{
+                input: "whitespace-normal text-md min-w-full",
+                mainWrapper: "border-0",
+              }}
+            ></Textarea>
           </div>
           <div className="bg-primary/25 h-full py-4 px-8 w-full">
             <div className="flex flex-col items-center w-full h-full gap-4">

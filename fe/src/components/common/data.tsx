@@ -8,7 +8,7 @@ const aaa = shuffle(arr);
 
 export const projectInfo = {
   name: "육군팀",
-  title: "독독",
+  title: "똑똑",
   description: "(가제) 팻 업계의 직방을 꿈군다",
 };
 
