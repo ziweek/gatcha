@@ -16,16 +16,24 @@ export default function KakaoMap() {
   const [loaded, setLoaded] = useState(isAlreadyLoaded);
   const [level, setLevel] = useState(8);
   const [currentBounds, setCurrentBounds] = useState<any>();
+  const [markersArray, setMarkersArray] = useState(DUMMY_MARKER);
   const mapRef = useRef<kakao.maps.Map>(null);
 
   const queryClient = useQueryClient();
   queryClient.setQueryData(["setCoordination"], () => setCoordination);
+  queryClient.setQueryData(["markersArray"], () =>
+    DUMMY_MARKER.filter((marker) =>
+      currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
+    )
+  );
 
   useEffect(() => {
-    kakao.maps.load(() => {
-      isAlreadyLoaded = true;
-      setLoaded(true);
-    });
+    if (kakao != undefined) {
+      kakao.maps.load(() => {
+        isAlreadyLoaded = true;
+        setLoaded(true);
+      });
+    }
   }, []);
 
   return (

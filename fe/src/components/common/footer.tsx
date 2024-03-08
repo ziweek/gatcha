@@ -18,7 +18,7 @@ export default function Footer(props: any) {
     "setIsFilterDetailVisible",
   ]);
   const sliderRef: any = queryClient.getQueryData(["sliderRef"]);
-  const numOfMarkers: any = queryClient.getQueryData(["numOfMarkers"]);
+  const markersArray: any = queryClient.getQueryData(["markersArray"]);
 
   const loadData = () => {
     const interval = setTimeout(() => {
@@ -52,10 +52,11 @@ export default function Footer(props: any) {
             <Button
               isDisabled
               isLoading={isLoading}
-              className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold min-w-[80px]"
+              className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold"
             >
-              {!isLoading && numOfMarkers != undefined ? numOfMarkers : 0} 마리
-              탐색
+              {!isLoading
+                ? `현재 지역에서 ${markersArray.length}마리 발견`
+                : ""}
             </Button>
           )}
           <Button
