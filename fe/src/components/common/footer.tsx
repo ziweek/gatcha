@@ -23,10 +23,11 @@ export default function Footer(props: any) {
   const loadData = () => {
     const interval = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 1200);
   };
 
   useEffect(() => {
+    console.log(data);
     setIsLoading(true);
     loadData();
   }, [data]);
@@ -54,8 +55,8 @@ export default function Footer(props: any) {
               isLoading={isLoading}
               className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold"
             >
-              {!isLoading
-                ? `현재 지역에서 ${markersArray.length}마리 발견`
+              {!isLoading && markersArray?.length != undefined
+                ? `현재 지역에서 ${markersArray?.length}마리 발견`
                 : ""}
             </Button>
           )}

@@ -1,31 +1,81 @@
 "use client";
 
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import { DUMMY_MARKER, START_COORDINATION } from "./common/data";
 import { CircularProgress } from "@nextui-org/react";
+import getFakeData from "@/hooks/useFakeData";
+
+function generateDatasetForDog() {
+  const { contractType, dogType, contractPrice, dogSex, dogAge, lat, lng } =
+    getFakeData();
+
+  return {
+    contractType: contractType,
+    dogType: dogType,
+    contractPrice: contractPrice,
+    dogSex: dogSex,
+    dogAge: dogAge,
+    lat: lat,
+    lng: lng,
+  };
+}
 
 let isAlreadyLoaded = false;
 
-export default function KakaoMap() {
+export default function KakaoMap(props: any) {
   const [coordination, setCoordination] = useState(START_COORDINATION);
   const key = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
 
   const [loaded, setLoaded] = useState(isAlreadyLoaded);
   const [level, setLevel] = useState(8);
   const [currentBounds, setCurrentBounds] = useState<any>();
-  const [markersArray, setMarkersArray] = useState(DUMMY_MARKER);
   const mapRef = useRef<kakao.maps.Map>(null);
+  const [dataset, setDataset] = useState<any>();
+
+  const [originDataset, setoriginDataset] = useState<any[]>();
+  const [displayedDataset, setDisplayedDataset] = useState<any>();
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["activatedFilters"],
+    queryFn: () => {},
+    staleTime: Infinity,
+  });
+
+  useEffect(() => {
+    var fakePayload = [];
+    for (let index = 0; index < 300; index++) {
+      const fakeDate = generateDatasetForDog();
+      fakePayload.push(fakeDate);
+    }
+    setDataset(fakePayload);
+    setDisplayedDataset(fakePayload);
+    setoriginDataset(fakePayload);
+  }, []);
+
+  useEffect(() => {
+    if (data?.["입양 유형"] != undefined) {
+      console.log(data?.["입양 유형"]);
+      const newDataset = originDataset?.filter((marker: any) =>
+        (data?.["입양 유형"] as any[]).includes(marker.contractType)
+      );
+      console.log(newDataset);
+      setDataset(newDataset);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const newDisplayedMarkers = dataset?.filter((marker: any) =>
+      currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
+    );
+    setDisplayedDataset(newDisplayedMarkers);
+    console.log(newDisplayedMarkers?.length);
+  }, [dataset, currentBounds, level]);
 
   const queryClient = useQueryClient();
   queryClient.setQueryData(["setCoordination"], () => setCoordination);
-  queryClient.setQueryData(["markersArray"], () =>
-    DUMMY_MARKER.filter((marker) =>
-      currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
-    )
-  );
+  queryClient.setQueryData(["markersArray"], () => displayedDataset);
 
   return (
     <>
@@ -62,6 +112,10 @@ export default function KakaoMap() {
               lng: target.getCenter().getLng(),
             };
             setCoordination(newCenter);
+          }}
+          onZoomChanged={(target) => {
+            const newLevel = target.getLevel();
+            setLevel(newLevel);
           }}
         >
           <MarkerClusterer
@@ -102,11 +156,7 @@ export default function KakaoMap() {
               },
             ]}
           >
-            {DUMMY_MARKER.filter((marker) =>
-              currentBounds?.contain(
-                new kakao.maps.LatLng(marker.lat, marker.lng)
-              )
-            ).map((pos) => (
+            {displayedDataset?.map((pos: any) => (
               <MapMarker
                 image={{
                   src: "/images/markerIcon.png",
@@ -116,6 +166,7 @@ export default function KakaoMap() {
                 position={{ lat: pos.lat, lng: pos.lng }}
                 onClick={(marker) => {
                   setCoordination({ lat: pos.lat, lng: pos.lng });
+                  console.log(pos);
                 }}
               />
             ))}
