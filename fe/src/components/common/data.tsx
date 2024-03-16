@@ -40,16 +40,16 @@ export type type_FILTER_PRESET = {
 };
 
 export const FILTER_PRESET: type_FILTER_PRESET = {
-  order: ["입양 유형", "견종", "분양가", "성별", "나이"],
+  order: ["contractType", "dogType", "dogPrice", "dogSex", "dogAge"],
   content: {
-    "입양 유형": {
+    contractType: {
       name: "입양 유형",
       default: undefined,
       value: undefined,
       type: "multiple",
       items: ["전문입양", "유기견", "가정분양"],
     },
-    견종: {
+    dogType: {
       name: "견종",
       default: undefined,
       value: undefined,
@@ -78,7 +78,7 @@ export const FILTER_PRESET: type_FILTER_PRESET = {
         "허스키",
       ],
     },
-    분양가: {
+    dogPrice: {
       name: "분양가",
       default: undefined,
       value: undefined,
@@ -111,14 +111,14 @@ export const FILTER_PRESET: type_FILTER_PRESET = {
         },
       ],
     },
-    성별: {
+    dogSex: {
       name: "성별",
       default: undefined,
       value: undefined,
       type: "multiple",
       items: ["남성", "여성"],
     },
-    나이: {
+    dogAge: {
       name: "나이",
       default: undefined,
       value: undefined,
@@ -155,7 +155,7 @@ export const FILTER_PRESET: type_FILTER_PRESET = {
 };
 
 export const templateForSelectedFilterOptions = {
-  "입양 유형": null,
+  contractType: null,
   견종: null,
   분양가: null,
   성병: null,

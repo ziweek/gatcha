@@ -22,7 +22,6 @@ export default function Footer(props: any) {
     "setIsFilterDetailVisible",
   ]);
   const sliderRef: any = queryClient.getQueryData(["sliderRef"]);
-  const markersArray: any = queryClient.getQueryData(["markersArray"]);
 
   const loadData = () => {
     const interval = setTimeout(() => {
@@ -31,9 +30,13 @@ export default function Footer(props: any) {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    loadData();
-  }, [data]);
+    async function aa() {
+      await queryDisplayDataset.refetch();
+      await setIsLoading(true);
+      await loadData();
+    }
+    aa();
+  }, [data, queryDisplayDataset.isFetched]);
 
   return (
     <section className="w-screen z-50 fixed bottom-0">
@@ -58,7 +61,7 @@ export default function Footer(props: any) {
               isLoading={isLoading}
               className="bg-white rounded-b-none offset opacity-100 drop-shadow-md shadow-lg text-primary font-bold"
             >
-              {!isLoading && markersArray?.length != undefined
+              {!isLoading && queryDisplayDataset.isFetched
                 ? `현재 지역에서 ${
                     (queryDisplayDataset.data as any)?.length
                   }마리 발견`

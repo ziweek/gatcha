@@ -44,6 +44,7 @@ export default function KakaoMap(props: any) {
   const queryDisplayDataset = useQuery({
     queryKey: ["displayedDataset"],
     queryFn: () => displayedDataset,
+    staleTime: Infinity,
   });
 
   useEffect(() => {
@@ -61,24 +62,61 @@ export default function KakaoMap(props: any) {
   }, []);
 
   useEffect(() => {
-    if (data?.["입양 유형"] == undefined || data?.["입양 유형"] == null) {
-      var newDataset = originDataset?.filter((marker: any) => true);
-      setDataset(newDataset);
-    } else {
-      var newDataset = originDataset?.filter((marker: any) =>
-        (data?.["입양 유형"] as any[])?.includes(marker.contractType)
-      );
-      setDataset(newDataset);
+    async function aaa() {
+      if (data?.["입양 유형"] == undefined || data?.["입양 유형"] == null) {
+        var newDataset = await originDataset?.filter((marker: any) => true);
+        await setDataset(newDataset);
+      } else {
+        var newDataset = await originDataset?.filter((marker: any) =>
+          (data?.["입양 유형"] as any[])?.includes(marker.contractType)
+        );
+        await setDataset(newDataset);
+        const newDisplayedMarkers = await newDataset?.filter((marker: any) =>
+          currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
+        );
+        await setDisplayedDataset(newDisplayedMarkers);
+        await queryDisplayDataset.refetch();
+      }
     }
+    async function bbb() {
+      if (data != undefined) {
+        var payload = await originDataset;
+        for (const [key, value] of Object.entries(data)) {
+          if (data?.[key] == undefined || data?.[key] == null) {
+            var payload = await payload?.filter((marker: any) => true);
+            await setDataset(payload);
+          } else {
+            await console.log(key);
+            await console.log(value);
+            var payload = await payload?.filter((marker: any) =>
+              (value as any[]).includes(marker[key])
+            );
+            await setDataset(payload);
+            const newDisplayedMarkers = await payload?.filter((marker: any) =>
+              currentBounds?.contain(
+                new kakao.maps.LatLng(marker.lat, marker.lng)
+              )
+            );
+            console.log(payload);
+            await setDisplayedDataset(newDisplayedMarkers);
+            await queryDisplayDataset.refetch();
+          }
+        }
+      }
+    }
+    bbb();
   }, [data]);
 
   useEffect(() => {
-    const newDisplayedMarkers = dataset?.filter((marker: any) =>
-      currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
-    );
-    setDisplayedDataset(newDisplayedMarkers);
-    queryDisplayDataset.refetch();
-  }, [dataset, currentBounds, level]);
+    async function aaa() {
+      const newDisplayedMarkers = await dataset?.filter((marker: any) =>
+        currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
+      );
+      await setDisplayedDataset(newDisplayedMarkers);
+      await queryDisplayDataset.refetch();
+    }
+    aaa();
+  }, [data, dataset, currentBounds, level]);
 
   const queryClient = useQueryClient();
   queryClient.setQueryData(["setCoordination"], () => setCoordination);

@@ -16,9 +16,9 @@ export function getFakeData() {
   const aaa = FILTER_PRESET;
   return {
     contractType: faker.helpers.arrayElement(
-      aaa.content["입양 유형"].items as string[]
+      aaa.content.contractType.items as string[]
     ),
-    dogType: faker.helpers.arrayElement(aaa.content["견종"].items as string[]),
+    dogType: faker.helpers.arrayElement(aaa.content.dogType.items as string[]),
     contractPrice: faker.number.int({ min: 0, max: 300 }),
     dogSex: faker.person.sex(),
     dogAge: faker.number.int({ min: 0, max: 15 }),

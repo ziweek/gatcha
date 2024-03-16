@@ -30,6 +30,10 @@ export default function Header(props: any) {
     () => setIsFilterDetailVisible
   );
   queryClient.setQueryData(["sliderRef"], () => sliderRef);
+  const queryDisplayDataset = useQuery({
+    queryKey: ["displayedDataset"],
+    queryFn: () => {},
+  });
 
   const setCoordination: any = queryClient.getQueryData(["setCoordination"]);
 
@@ -168,7 +172,7 @@ export default function Header(props: any) {
                                   ).unit
                                 } 미만`
                           }`
-                        : e
+                        : FILTER_PRESET.content[e].name
                       : // 타입 검사
                       activatedFilters[e] != null ||
                         activatedFilters[e] != undefined
@@ -178,7 +182,7 @@ export default function Header(props: any) {
                             activatedFilters[e].length - 1
                           }개`
                         : activatedFilters[e][0]
-                      : e
+                      : FILTER_PRESET.content[e].name
                   }
                 </Button>
               );
@@ -269,7 +273,7 @@ export default function Header(props: any) {
                                 ? "primary"
                                 : "default"
                             }
-                            onPress={() => {
+                            onPress={async () => {
                               //
                               var newActivatedFilter: any =
                                 activatedFilters[activatedFilter] == undefined
@@ -296,7 +300,7 @@ export default function Header(props: any) {
                                   ? undefined
                                   : newActivatedFilter;
                               //
-                              setActivatedFilters(newActivatedFilters);
+                              await setActivatedFilters(newActivatedFilters);
                             }}
                           >
                             {item}

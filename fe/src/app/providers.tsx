@@ -13,7 +13,7 @@ export default function AppProvider({ children }: any) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position={"right"} />
       <NextUIProvider>
         <NextThemesProvider attribute="class" defaultTheme={"light"}>
           {children}
