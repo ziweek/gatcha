@@ -27,7 +27,6 @@ export default function Home() {
           setIsModalVisible={setIsModalVisible}
         ></Header>
         {!isModalVisible ? (
-          // <BaseMap></BaseMap>
           <KakaoMap></KakaoMap>
         ) : (
           <div className="flex flex-col justify-start px-4 gap-2 items-center pb-12 pt-4 w-full">

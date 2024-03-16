@@ -1,6 +1,5 @@
 "use client";
 
-import Tutorial from "@/components/modal-tutorial";
 import { Card, Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -8,54 +7,6 @@ import { useMediaQuery } from "react-responsive";
 import { LottieHi } from "@/components/common/lotties";
 import { projectInfo } from "@/components/common/data";
 import Footer from "@/components/common/footer";
-
-const homeTutorialContent = [
-  {
-    header: (
-      <div className="text-2xl font-bold">{/* 짜잔! 바라는바당입니다. */}</div>
-    ),
-    body: (
-      <div>
-        <p className="w-full text-xl font-bold text-center">
-          {projectInfo.description}
-        </p>
-        <div className="flex flex-col items-center w-full">
-          <LottieHi loop={true} width={"200px"}></LottieHi>
-        </div>
-        <p className="w-full text-center text-pretty">
-          안녕하세요. {projectInfo.name}입니다.
-        </p>
-        <p className="w-full text-center text-pretty">
-          지금부터 튜토리얼을 진행하겠습니다.
-        </p>
-      </div>
-    ),
-  },
-  // {
-  //   header: <div className="font-bold ">국회 의정 체험 활동 주제 선택하기</div>,
-  //   body: (
-  //     <>
-  //       <LottieDebate loop={true} height={"250px"}></LottieDebate>
-  //       <p className="font-bold">기능소개</p>
-  //       <p className="px-2 break-keep text-pretty">
-  //         다양한 주제에서 국회 의정활동 체험을 즐겨보세요. 흥미로운 주제로 더욱
-  //         유익하고 재미있는 체험을 즐길 수 있습니다!
-  //       </p>
-  //     </>
-  //   ),
-  // },
-];
-
-const tabData = [
-  {
-    title: "어떤 반려동물을 찾고 계신가요?",
-    content: [],
-  },
-  {
-    title: "어떤 관리가 필요하신가요?",
-    content: [],
-  },
-];
 
 export default function Home() {
   const [mobile, setMobile] = useState<boolean>(false);
@@ -77,11 +28,6 @@ export default function Home() {
 
   return (
     <section className="z-0 flex flex-col items-center justify-start w-full h-screen py-8 space-y-6">
-      <div className="flex flex-col items-start justify-center w-full px-4 space-y-1">
-        <p className="w-full text-xl font-bold select-none text-start">
-          {tabIndex == 0 ? tabData[0].title : ""}
-        </p>
-      </div>
       {tabIndex == 0 ? (
         <div
           className="flex h-fit w-full px-6 select-none flex-col items-center justify-start max-w-[1200px]"
@@ -202,7 +148,6 @@ export default function Home() {
           </div>
         </div>
       )}
-      <Tutorial tutorialContent={homeTutorialContent}></Tutorial>
       <Footer tabIndex={tabIndex} setTabIndex={setTabIndex}></Footer>
     </section>
   );

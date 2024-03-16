@@ -4,9 +4,9 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
-import { DUMMY_MARKER, START_COORDINATION } from "./common/data";
+import { START_COORDINATION } from "./common/data";
 import { CircularProgress } from "@nextui-org/react";
-import getFakeData from "@/hooks/useFakeData";
+import { getFakeData, typeForDataset } from "@/hooks/useFakeData";
 
 function generateDatasetForDog() {
   const { contractType, dogType, contractPrice, dogSex, dogAge, lat, lng } =
@@ -33,34 +33,41 @@ export default function KakaoMap(props: any) {
   const [level, setLevel] = useState(8);
   const [currentBounds, setCurrentBounds] = useState<any>();
   const mapRef = useRef<kakao.maps.Map>(null);
-  const [dataset, setDataset] = useState<any>();
 
-  const [originDataset, setoriginDataset] = useState<any[]>();
-  const [displayedDataset, setDisplayedDataset] = useState<any>();
+  const [dataset, setDataset] = useState<typeForDataset[]>();
+  const [originDataset, setoriginDataset] = useState<typeForDataset[]>();
+  const [displayedDataset, setDisplayedDataset] = useState<typeForDataset[]>();
   const { data, error, isLoading } = useQuery({
     queryKey: ["activatedFilters"],
     queryFn: () => {},
-    staleTime: Infinity,
+  });
+  const queryDisplayDataset = useQuery({
+    queryKey: ["displayedDataset"],
+    queryFn: () => displayedDataset,
   });
 
   useEffect(() => {
-    var fakePayload = [];
-    for (let index = 0; index < 300; index++) {
-      const fakeDate = generateDatasetForDog();
-      fakePayload.push(fakeDate);
+    async function getGeneratedData() {
+      var fakePayload: any = [];
+      for (let index = 0; index < 100; index++) {
+        const fakeDate = await generateDatasetForDog();
+        await fakePayload.push(fakeDate);
+      }
+      await setDisplayedDataset(fakePayload);
+      await setoriginDataset(fakePayload);
+      await setDataset(fakePayload);
     }
-    setDataset(fakePayload);
-    setDisplayedDataset(fakePayload);
-    setoriginDataset(fakePayload);
+    getGeneratedData();
   }, []);
 
   useEffect(() => {
-    if (data?.["입양 유형"] != undefined) {
-      console.log(data?.["입양 유형"]);
-      const newDataset = originDataset?.filter((marker: any) =>
-        (data?.["입양 유형"] as any[]).includes(marker.contractType)
+    if (data?.["입양 유형"] == undefined || data?.["입양 유형"] == null) {
+      var newDataset = originDataset?.filter((marker: any) => true);
+      setDataset(newDataset);
+    } else {
+      var newDataset = originDataset?.filter((marker: any) =>
+        (data?.["입양 유형"] as any[])?.includes(marker.contractType)
       );
-      console.log(newDataset);
       setDataset(newDataset);
     }
   }, [data]);
@@ -70,7 +77,7 @@ export default function KakaoMap(props: any) {
       currentBounds?.contain(new kakao.maps.LatLng(marker.lat, marker.lng))
     );
     setDisplayedDataset(newDisplayedMarkers);
-    console.log(newDisplayedMarkers?.length);
+    queryDisplayDataset.refetch();
   }, [dataset, currentBounds, level]);
 
   const queryClient = useQueryClient();

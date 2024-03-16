@@ -31,16 +31,6 @@ export default function Header(props: any) {
   );
   queryClient.setQueryData(["sliderRef"], () => sliderRef);
 
-  // function scrollToLeft(sliderRef: any) {
-  //   if (sliderRef != null && sliderRef != undefined) {
-  //     sliderRef.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "nearest",
-  //       inline: "nearest",
-  //     });
-  //   }
-  // }
-
   const setCoordination: any = queryClient.getQueryData(["setCoordination"]);
 
   return (
@@ -80,7 +70,7 @@ export default function Header(props: any) {
               alt="logo"
             ></Image>
           )}
-          {props.isSearchBarVisible && <SearchBar></SearchBar>}
+          {/* {props.isSearchBarVisible && <SearchBar></SearchBar>} */}
           {props.title && (
             <>
               <p className="w-full text-xl font-bold select-none text-center">
@@ -116,11 +106,6 @@ export default function Header(props: any) {
             <div>
               <IconFilter
                 width={25}
-                // fill={
-                //   Object.keys(activatedFilters) == undefined
-                //     ? "#ffffff"
-                //     : "#FF917E"
-                // }
                 fill={"#FF917E"}
                 strokeFill={"#FF917E"}
               ></IconFilter>
@@ -198,28 +183,6 @@ export default function Header(props: any) {
                 </Button>
               );
             })}
-            {/* <Button
-              variant={"light"}
-              radius={"sm"}
-              size={"sm"}
-              color={"danger"}
-              className="min-w-fit mx-2"
-              onPress={() => {
-                if (
-                  sliderRef.current != null &&
-                  sliderRef.current != undefined
-                ) {
-                  sliderRef.current.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                    inline: "nearest",
-                  });
-                }
-                setActivatedFilters({});
-              }}
-            >
-              필터 모두 해제하기
-            </Button> */}
           </div>
 
           {/* FILTER DETAIL */}
@@ -333,7 +296,6 @@ export default function Header(props: any) {
                                   ? undefined
                                   : newActivatedFilter;
                               //
-                              // console.log(newActivatedFilters);
                               setActivatedFilters(newActivatedFilters);
                             }}
                           >
@@ -412,8 +374,8 @@ export default function Header(props: any) {
                 onPress={() => {
                   if (location.loaded) {
                     setCoordination(location.coordinates);
-                    console.log(location.coordinates?.lat);
-                    console.log(location.coordinates?.lng);
+                    // console.log(location.coordinates?.lat);
+                    // console.log(location.coordinates?.lng);
                   } else {
                     console.log("로딩중..");
                   }
