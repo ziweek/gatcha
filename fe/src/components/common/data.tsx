@@ -40,7 +40,7 @@ export type type_FILTER_PRESET = {
 };
 
 export const FILTER_PRESET: type_FILTER_PRESET = {
-  order: ["contractType", "dogType", "dogPrice", "dogSex", "dogAge"],
+  order: ["contractType", "dogType", "contractPrice", "dogSex", "dogAge"],
   content: {
     contractType: {
       name: "입양 유형",
@@ -78,7 +78,7 @@ export const FILTER_PRESET: type_FILTER_PRESET = {
         "허스키",
       ],
     },
-    dogPrice: {
+    contractPrice: {
       name: "분양가",
       default: undefined,
       value: undefined,

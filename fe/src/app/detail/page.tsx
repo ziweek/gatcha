@@ -7,7 +7,6 @@ import { Button, Link, Textarea } from "@nextui-org/react";
 import Footer from "@/components/common/footer";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { typeForDataset } from "@/hooks/useFakeData";
 
 export default function Detail() {
   const router = useRouter();

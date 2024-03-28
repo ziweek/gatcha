@@ -50,7 +50,7 @@ export default function KakaoMap(props: any) {
   useEffect(() => {
     async function getGeneratedData() {
       var fakePayload: any = [];
-      for (let index = 0; index < 100; index++) {
+      for (let index = 0; index < 800; index++) {
         const fakeDate = await generateDatasetForDog();
         await fakePayload.push(fakeDate);
       }
@@ -86,18 +86,35 @@ export default function KakaoMap(props: any) {
             var payload = await payload?.filter((marker: any) => true);
             await setDataset(payload);
           } else {
-            await console.log(key);
-            await console.log(value);
-            var payload = await payload?.filter((marker: any) =>
-              (value as any[]).includes(marker[key])
-            );
+            // await console.log(key);
+            // await console.log(value);
+            if (key == "contractPrice") {
+              var payload = await payload?.filter(
+                (marker: any) =>
+                  (value as any[])[0] <= marker.contractPrice &&
+                  marker.contractPrice <= (value as any[])[1]
+              );
+            } else {
+              if (key == "dogAge") {
+                var payload = await payload?.filter(
+                  (marker: any) =>
+                    (value as any[])[0] <= marker.dogAge &&
+                    marker.dogAge <= (value as any[])[1]
+                );
+              } else {
+                var payload = await payload?.filter((marker: any) =>
+                  (value as any[]).includes(marker[key])
+                );
+              }
+            }
+
             await setDataset(payload);
             const newDisplayedMarkers = await payload?.filter((marker: any) =>
               currentBounds?.contain(
                 new kakao.maps.LatLng(marker.lat, marker.lng)
               )
             );
-            console.log(payload);
+            // await console.log(payload);
             await setDisplayedDataset(newDisplayedMarkers);
             await queryDisplayDataset.refetch();
           }
@@ -211,7 +228,7 @@ export default function KakaoMap(props: any) {
                 position={{ lat: pos.lat, lng: pos.lng }}
                 onClick={(marker) => {
                   setCoordination({ lat: pos.lat, lng: pos.lng });
-                  console.log(pos);
+                  // console.log(pos);
                 }}
               />
             ))}
