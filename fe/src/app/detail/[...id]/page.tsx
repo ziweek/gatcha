@@ -5,20 +5,69 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Image from "next/image";
 import { Button, Link, Textarea } from "@nextui-org/react";
 import Footer from "@/components/common/footer";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { typeForDataset } from "@/hooks/useFakeData";
+
+function DogImage() {
+  const [dogImgSrc, setDogImgSrc] = useState<string>("");
+
+  const imageLoader = async () => {
+    const data = await fetch("https://dog.ceo/api/breeds/image/random")
+      .then(async (response: any) => {
+        const res = await response.json();
+        await console.log("response:", res.message);
+        setDogImgSrc(res.message);
+        return res.message;
+      })
+      .catch((error) => {
+        console.log("error:", error);
+        return "https://example.com";
+      });
+    return dogImgSrc;
+  };
+
+  useEffect(() => {
+    imageLoader();
+  }, []);
+
+  return (
+    <Image
+      src={dogImgSrc}
+      width="100"
+      height="100"
+      alt="dog"
+      className="object-cover rounded-xl w-full h-full"
+    ></Image>
+  );
+}
 
 export default function Detail() {
   const router = useRouter();
-  const queryDisplayDataset = useQuery({
+  const pathname = usePathname();
+  const queryDisplayDataset: any = useQuery({
     queryKey: ["displayedDataset"],
     queryFn: () => {},
     refetchOnMount: true,
   });
 
+  const [detailData, setdetailData] = useState<typeForDataset>();
+
+  useEffect(() => {
+    const i = pathname.split("/")[2];
+    console.log(queryDisplayDataset.data);
+    console.log(queryDisplayDataset.data[i]);
+    const a = queryDisplayDataset.data[i];
+    setdetailData(a);
+    // if (queryDisplayDataset.data != undefined) {
+    //   setdetailData(queryDisplayDataset.data[i]);
+    // }
+  }, []);
+
   return (
     <>
-      {queryDisplayDataset != undefined && (
+      {queryDisplayDataset.data != undefined && (
         <section className="z-0 flex flex-col items-center justify-start w-full h-full pb-8 space-y-6">
           <div className="flex flex-col w-full h-fit">
             <div className="absolute top-4 left-4 w-fit h-fit z-50">
@@ -36,20 +85,10 @@ export default function Detail() {
               </Button>
             </div>
             <Carousel autoPlay dynamicHeight showThumbs={false}>
-              {[
-                { imgSrc: "/images/landing-dog2.jpg" },
-                { imgSrc: "/images/landing-dog.jpg" },
-                { imgSrc: "/images/1.jpg" },
-              ].map((e, i) => {
+              {[1, 2, 3].map((e, i) => {
                 return (
-                  <div key={i} className="h-full">
-                    <Image
-                      src={e.imgSrc}
-                      width={100}
-                      height={100}
-                      className="h-[300px] object-cover object-center"
-                      alt="a"
-                    />
+                  <div key={i} className="h-[300px]">
+                    <DogImage></DogImage>
                   </div>
                 );
               })}
@@ -65,21 +104,19 @@ export default function Detail() {
                   <p className="font-semibold text-tiny">17일 전</p>
                 </div>
                 <p className="text-xl font-bold">
-                  {/* {(queryDisplayDataset.data as any)[0]?.contractPrice || ""} */}
-                  aaa 만원
+                  {detailData != undefined && detailData.contractPrice}
+                  만원
                 </p>
                 <div className="flex flex-row gap-1">
                   <p className="text-sm">
-                    {/* {(queryDisplayDataset.data as any)[0]?.dogType || ""} */}
-                    aaa
+                    {detailData != undefined && detailData?.dogType}
                   </p>
                   <p className="text-sm">
-                    {/* {(queryDisplayDataset.data as any)[0]?.dogSex || ""} */}
-                    aaa
+                    {detailData != undefined && detailData.dogSex}
                   </p>
                   <p className="text-sm">
-                    {/* {(queryDisplayDataset.data as any)[0]?.dogAge || ""} */}
-                    aaa
+                    {detailData != undefined && detailData.dogAge}
+                    개월령
                   </p>
                 </div>
               </div>

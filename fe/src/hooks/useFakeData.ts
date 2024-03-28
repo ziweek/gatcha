@@ -19,11 +19,12 @@ export function getFakeData() {
       aaa.content.contractType.items as string[]
     ),
     dogType: faker.helpers.arrayElement(aaa.content.dogType.items as string[]),
-    contractPrice: faker.number.int({ min: 0, max: 300 }),
-    dogSex: faker.person.sex(),
+    contractPrice: faker.number.int({ min: 40, max: 300 }),
+    dogSex: faker.helpers.arrayElement(["남성", "여성"] as string[]),
     dogAge: faker.number.int({ min: 0, max: 15 }),
     lat: faker.location.latitude({ min: 35, max: 37.7 }),
     lng: faker.location.longitude({ min: 126.7, max: 129 }),
+    dogImg: "",
   };
 }
 

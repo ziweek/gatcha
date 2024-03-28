@@ -9,8 +9,16 @@ import { CircularProgress } from "@nextui-org/react";
 import { getFakeData, typeForDataset } from "@/hooks/useFakeData";
 
 function generateDatasetForDog() {
-  const { contractType, dogType, contractPrice, dogSex, dogAge, lat, lng } =
-    getFakeData();
+  const {
+    contractType,
+    dogType,
+    contractPrice,
+    dogSex,
+    dogAge,
+    lat,
+    lng,
+    dogImg,
+  } = getFakeData();
 
   return {
     contractType: contractType,
@@ -20,6 +28,7 @@ function generateDatasetForDog() {
     dogAge: dogAge,
     lat: lat,
     lng: lng,
+    dogImg: dogImg,
   };
 }
 
@@ -30,7 +39,7 @@ export default function KakaoMap(props: any) {
   const key = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
 
   const [loaded, setLoaded] = useState(isAlreadyLoaded);
-  const [level, setLevel] = useState(8);
+  const [level, setLevel] = useState(10);
   const [currentBounds, setCurrentBounds] = useState<any>();
   const mapRef = useRef<kakao.maps.Map>(null);
 
@@ -114,7 +123,7 @@ export default function KakaoMap(props: any) {
                 new kakao.maps.LatLng(marker.lat, marker.lng)
               )
             );
-            // await console.log(payload);
+            await console.log(payload);
             await setDisplayedDataset(newDisplayedMarkers);
             await queryDisplayDataset.refetch();
           }

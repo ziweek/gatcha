@@ -5,7 +5,12 @@ const withPWA = require("next-pwa")({
   disable: true,
 });
 
-const nextConfig = { reactStrictMode: false };
+const nextConfig = {
+  reactStrictMode: false,
+  images: {
+    domains: ["images.dog.ceo", "dog.ceo", "localhost"],
+  },
+};
 
 // module.exports = nextConfig;
 
